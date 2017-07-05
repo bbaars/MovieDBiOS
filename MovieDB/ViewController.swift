@@ -10,10 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        var movie = MovieDB(url: "discover/movie?sort_by=popularity.desc")
+        movie.downloadMovieDBDetails {
+            
+            print("completed")
+        }
         
     }
 
