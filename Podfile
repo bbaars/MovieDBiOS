@@ -10,7 +10,7 @@ target 'MovieDB' do
 	pod 'Alamofire', '~>4.0'
 	pod 'Fabric'
 	pod 'TwitterKit'
-
+	pod 'AlamofireImage','~>3.1'
   target 'MovieDBTests' do
     inherit! :search_paths
     # Pods for testing

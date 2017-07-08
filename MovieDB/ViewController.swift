@@ -7,25 +7,26 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var menuView: UIViewX!
+    @IBOutlet weak var image: UIImageView!
+    
+    var posterImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let movie = MovieDB(url: "discover/movie?sort_by=popularity.desc")
+        let movie = MovieDB()
+
         
-        /* perform the code when the loading of the movies has completed */
-        movie.downloadMovieDBDetails {
-            
-            print("completed")
-        }
+        let url = URL(string: "https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg")!
+        image.af_setImage(withURL: url)
         
-        /* CGAFFINE : preserve parallel relationships
-         1, 1 leaves it the same size. */
+        
         closeMenu()
     }
     
@@ -42,7 +43,10 @@ class ViewController: UIViewController {
         })
     }
     
+
     func closeMenu() {
+        
+        /* CGAFFINE : preserve parallel relationships -> 1, 1 leaves it the same size. */
         self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
     }
     
