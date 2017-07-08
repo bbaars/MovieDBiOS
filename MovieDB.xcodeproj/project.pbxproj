@@ -22,6 +22,7 @@
 		CA6190321F0442C700805A59 /* MovieDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6190311F0442C700805A59 /* MovieDBUITests.swift */; };
 		CAE9180F1F1040D5005A8071 /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9180E1F1040D5005A8071 /* UIButtonX.swift */; };
 		CAE918111F10466C005A8071 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE918101F10466C005A8071 /* UIViewX.swift */; };
+		CAE918131F1052B2005A8071 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE918121F1052B2005A8071 /* Credit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		CA6190331F0442C700805A59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAE9180E1F1040D5005A8071 /* UIButtonX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
 		CAE918101F10466C005A8071 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
+		CAE918121F1052B2005A8071 /* Credit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		F25B90B266F837D3AA2A15EE /* Pods_MovieDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2326051A0E53BA8BAC769E /* Pods-MovieDBUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieDBUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieDBUITests/Pods-MovieDBUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 				CAE9180E1F1040D5005A8071 /* UIButtonX.swift */,
 				CA5508F81F103C6C004AEAB0 /* FloatingActionButton.swift */,
 				CA1D24A01F0D9F3D00E69F96 /* Constants.swift */,
+				CAE918121F1052B2005A8071 /* Credit.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 			files = (
 				CA1D249E1F0D9E0D00E69F96 /* MovieDB.swift in Sources */,
 				CA6190141F0442C700805A59 /* ViewController.swift in Sources */,
+				CAE918131F1052B2005A8071 /* Credit.swift in Sources */,
 				CAE9180F1F1040D5005A8071 /* UIButtonX.swift in Sources */,
 				CA5508F91F103C6C004AEAB0 /* FloatingActionButton.swift in Sources */,
 				CA6190121F0442C700805A59 /* AppDelegate.swift in Sources */,

@@ -24,6 +24,26 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOG-0I-Ae9" customClass="UIViewX" customModule="MovieDB" customModuleProvider="target">
                                 <rect key="frame" x="159" y="447" width="340" height="340"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qy-3l-ryy">
+                                        <rect key="frame" x="147" y="36" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="Actor"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkI-eB-YiP">
+                                        <rect key="frame" x="42" y="149" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="Star"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJz-Fi-JE2">
+                                        <rect key="frame" x="77" y="76" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="Movie"/>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -39,7 +59,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.07127254456281662" green="0.84320765733718872" blue="0.52749687433242798" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="fab"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -56,8 +76,55 @@
                                     <action selector="menuTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rEn-EJ-Be4"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1h-SR-7fM">
+                                <rect key="frame" x="0.0" y="20" width="375" height="65"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drb-Q2-xBr">
+                                        <rect key="frame" x="8" y="16" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="TMp-gR-sUZ"/>
+                                            <constraint firstAttribute="height" constant="33" id="cTl-bA-4I8"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="menu"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XmO-9b-YQF">
+                                        <rect key="frame" x="334" y="16" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="Xxm-G6-AFe"/>
+                                            <constraint firstAttribute="width" constant="33" id="lj8-r0-aNU"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.071272544559999998" green="0.84320765730000002" blue="0.52749687430000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="Search"/>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movieDBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YBW-7H-5In">
+                                        <rect key="frame" x="159" y="9" width="56" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="56" id="BhV-nW-tqj"/>
+                                            <constraint firstAttribute="height" constant="46" id="YNn-cw-HKN"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="YBW-7H-5In" firstAttribute="centerY" secondItem="J1h-SR-7fM" secondAttribute="centerY" id="AYl-bJ-tYh"/>
+                                    <constraint firstAttribute="trailing" secondItem="XmO-9b-YQF" secondAttribute="trailing" constant="8" id="HDs-p9-8uL"/>
+                                    <constraint firstItem="Drb-Q2-xBr" firstAttribute="top" secondItem="J1h-SR-7fM" secondAttribute="top" constant="16" id="X5W-9h-JC3"/>
+                                    <constraint firstItem="Drb-Q2-xBr" firstAttribute="leading" secondItem="J1h-SR-7fM" secondAttribute="leading" constant="8" id="dZx-fb-9eJ"/>
+                                    <constraint firstAttribute="height" constant="65" id="kKe-H9-oL9"/>
+                                    <constraint firstAttribute="bottom" secondItem="Drb-Q2-xBr" secondAttribute="bottom" constant="16" id="qnV-rd-sSq"/>
+                                    <constraint firstItem="XmO-9b-YQF" firstAttribute="top" secondItem="J1h-SR-7fM" secondAttribute="top" constant="16" id="wpI-ot-Kc0"/>
+                                    <constraint firstItem="YBW-7H-5In" firstAttribute="centerX" secondItem="J1h-SR-7fM" secondAttribute="centerX" id="z7k-d7-9Fq"/>
+                                    <constraint firstAttribute="bottom" secondItem="XmO-9b-YQF" secondAttribute="bottom" constant="16" id="zbW-U4-KXz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="J1h-SR-7fM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iW3-NI-K1r"/>
+                            <constraint firstAttribute="trailing" secondItem="J1h-SR-7fM" secondAttribute="trailing" id="r45-0U-Mu5"/>
+                            <constraint firstItem="J1h-SR-7fM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vAz-eE-QoU"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="menuView" destination="HOG-0I-Ae9" id="mBQ-B6-cBG"/>
@@ -69,6 +136,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Actor" width="41" height="40"/>
+        <image name="Movie" width="41" height="40"/>
+        <image name="Search" width="41" height="40"/>
+        <image name="Star" width="41" height="40"/>
         <image name="fab" width="60" height="60"/>
+        <image name="menu" width="44" height="44"/>
+        <image name="movieDBLogo" width="91" height="81"/>
     </resources>
 </document>
