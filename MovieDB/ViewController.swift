@@ -54,9 +54,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.popularDescription.text = self.topMovies[0].overview
                 self.tableView.reloadData()
             }
-            
-            
-            
+
             self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
         }
     }

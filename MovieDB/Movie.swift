@@ -17,6 +17,7 @@ class Movie {
     private var _homepage: String?
     private var _id: Int?
     private var _imdbId: String?
+    private var _movieTrailer: String?
     private var _originalLanguage: String?
     private var _originalTitle: String?
     private var _overview: String?
@@ -79,6 +80,14 @@ class Movie {
         }
         
         return _imdbId!
+    }
+    
+    var movieTrailer: String {
+        if _movieTrailer == nil{
+            return ""
+        }
+        
+        return _movieTrailer!
     }
     
     var originalLanguage: String {
@@ -198,10 +207,7 @@ class Movie {
         self.update(dict)
     }
     
-    init() {
 
-    }
-    
     func update(_ dict: [String:Any]) {
         
         _adult = dict[movieKeys.Adult] as? Bool
@@ -210,6 +216,7 @@ class Movie {
         _homepage = dict[movieKeys.Homepage] as? String
         _id = dict[movieKeys.ID] as? Int
         _imdbId = dict[movieKeys.IMDBID] as? String
+        _movieTrailer = dict[movieKeys.MovieTrailer] as? String
         _originalLanguage = dict[movieKeys.OriginalLanguage] as? String
         _originalTitle = dict[movieKeys.OriginalTitle] as? String
         _overview = dict[movieKeys.Overview] as? String
@@ -224,6 +231,7 @@ class Movie {
         _video = dict[movieKeys.Video] as? Bool
         _voteAverage = dict[movieKeys.VoteAverage] as? Double
         _voteCount = dict[movieKeys.VoteCount] as? Int
+
     }
     
     func runtimeToString() -> String? {

@@ -12,6 +12,7 @@ import Foundation
 let APIKey = "6615c9824f812a6fb9b8b4ea5f49a285"
 let APIUrlPrefix = "https://api.themoviedb.org/3"
 let imageUrlPrefix = "https://image.tmdb.org/t/p/"
+let youtubeVideoUrl = "https://www.youtube.com/watch?v="
 
 public enum DisplayType : Int {
     case poster
@@ -26,6 +27,7 @@ struct movieKeys {
     static let Homepage = "homepage"
     static let ID = "id"
     static let IMDBID = "imdb_id"
+    static let MovieTrailer = "trailer"
     static let OriginalLanguage = "original_language"
     static let OriginalTitle = "original_title"
     static let Overview = "overview"

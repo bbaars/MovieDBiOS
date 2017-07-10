@@ -70,7 +70,7 @@ class MovieDBManager {
                     for movie in results {
                         
                         if let id = movie[movieKeys.ID] {
-                            self.downloadMoreMovieDetails(url: "\(APIUrlPrefix)/movie/\(id)?") {
+                            self.downloadMoreMovieDetails(url: "\(APIUrlPrefix)/movie/\(id)?api_key=") {
                                 
                             }
                         }
@@ -153,7 +153,7 @@ class MovieDBManager {
     private func downloadMoreMovieDetails(url: String, completed: @escaping DownloadComplete) {
         
         
-        Alamofire.request(url, parameters: ["api_key": APIKey]).responseJSON { response in
+        Alamofire.request("\(url)\(APIKey)&append_to_response=videos").responseJSON { response in
             
             /* Obtains the dictionary representation of the JSON */
             if let movie = response.result.value as? [String:Any] {
@@ -240,6 +240,15 @@ class MovieDBManager {
                 
                 if let voteCount = movie[movieKeys.VoteCount] as? Int {
                     tempDict[movieKeys.VoteCount] = voteCount
+                }
+                
+                if let videos = movie["videos"] as? [String:Any] {
+                    if let results = videos["results"] as? [[String:Any]] {
+                        if let key = results[0]["key"] as? String {
+                            tempDict[movieKeys.MovieTrailer] = key
+
+                        }
+                    }
                 }
                 
                 self.detailedTopMovies.append(Movie(dict: tempDict))

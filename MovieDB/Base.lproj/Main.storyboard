@@ -36,7 +36,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u15-Eq-fhx">
                                                     <rect key="frame" x="0.0" y="6.5" width="367" height="128"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notAvailable" translatesAutoresizingMaskIntoConstraints="NO" id="nND-Sz-8uJ" customClass="UIImageViewX" customModule="MovieDB" customModuleProvider="target">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nND-Sz-8uJ" customClass="UIImageViewX" customModule="MovieDB" customModuleProvider="target">
                                                             <rect key="frame" x="13" y="8" width="89" height="113"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="113" id="2aK-x2-pvZ"/>
@@ -136,7 +136,7 @@
                                         <color key="tintColor" red="0.071272544559999998" green="0.84320765730000002" blue="0.52749687430000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="Search"/>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movieDBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YBW-7H-5In">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MovieDBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YBW-7H-5In">
                                         <rect key="frame" x="159" y="9" width="56" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="56" id="BhV-nW-tqj"/>
@@ -321,11 +321,10 @@
     <resources>
         <image name="Actor" width="41" height="40"/>
         <image name="Movie" width="41" height="40"/>
+        <image name="MovieDBLogo" width="252" height="223"/>
         <image name="Search" width="41" height="40"/>
         <image name="Star" width="41" height="40"/>
         <image name="fab" width="60" height="60"/>
         <image name="menu" width="44" height="44"/>
-        <image name="movieDBLogo" width="91" height="81"/>
-        <image name="notAvailable" width="500" height="500"/>
     </resources>
 </document>
