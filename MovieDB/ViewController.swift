@@ -9,26 +9,82 @@
 import UIKit
 import AlamofireImage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    /* IB OUTLETS */
     @IBOutlet weak var menuView: UIViewX!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var popularTitle: UILabel!
+    @IBOutlet weak var popularDescription: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
+    
+    /* Our poster image */
     var posterImage: UIImage!
+    
+    /* Array of top movies */
+    var topMovies: [Movie] = [Movie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        let movie = MovieDB()
-
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        let url = URL(string: "https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg")!
-        image.af_setImage(withURL: url)
-        
-        
+        loadDetails()
         closeMenu()
+        
+        let img = UIImage(named: "notAvailable")
+        self.image.image = img
+        
+        
     }
+    
+    func loadDetails() {
+        
+        let movie = MovieDBManager()
+        
+        
+        movie.downloadMovieDBDetails(parameter: SearchTypes.popular) {
+            
+            self.topMovies = movie.getTopMovies()
+            if let url = URL(string: "\(imageUrlPrefix)w500/\(self.topMovies[0].posterPath)") {
+                self.image.af_setImage(withURL: url)
+                self.popularTitle.text = self.topMovies[0].title
+                self.popularDescription.text = self.topMovies[0].overview
+                self.tableView.reloadData()
+            }
+            
+            
+            
+            self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
+        }
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return topMovies.count - 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row + 1 < topMovies.count {
+            let movie = topMovies[indexPath.row + 1]
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieCell {
+                cell.configureCell(movie: movie)
+                return cell
+            }
+        }
+        return MovieCell()
+    }
+    
     
     /* When the + button is tapped in the bottom right hand corner of our First VC */
     @IBAction func menuTapped(_ sender: Any) {
@@ -43,7 +99,7 @@ class ViewController: UIViewController {
         })
     }
     
-
+    
     func closeMenu() {
         
         /* CGAFFINE : preserve parallel relationships -> 1, 1 leaves it the same size. */

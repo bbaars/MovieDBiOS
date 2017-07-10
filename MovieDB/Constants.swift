@@ -8,5 +8,50 @@
 
 import Foundation
 
+/* API Relevent information needed to make a request to TMDB */
+let APIKey = "6615c9824f812a6fb9b8b4ea5f49a285"
+let APIUrlPrefix = "https://api.themoviedb.org/3"
+let imageUrlPrefix = "https://image.tmdb.org/t/p/"
 
+public enum DisplayType : Int {
+    case poster
+    case backdrop
+    case profile
+}
+
+struct movieKeys {
+    static let Adult = "adult"
+    static let BackdropPath = "backdrop_path"
+    static let Budget = "budget"
+    static let Homepage = "homepage"
+    static let ID = "id"
+    static let IMDBID = "imdb_id"
+    static let OriginalLanguage = "original_language"
+    static let OriginalTitle = "original_title"
+    static let Overview = "overview"
+    static let Popularity = "popularity"
+    static let PosterPath = "poster_path"
+    static let ReleaseDate = "release_date"
+    static let Revenue = "revenue"
+    static let Runtime = "runtime"
+    static let Status = "status"
+    static let Tagline = "tagline"
+    static let Title = "title"
+    static let Video = "video"
+    static let VoteAverage = "vote_average"
+    static let VoteCount = "vote_count"
+}
+
+
+struct SearchTypes {
+    static let popular = "/movie/popular"
+}
+
+/* typealia for when an asynchronous function completes */
 typealias DownloadComplete = () -> ()
+
+func performUIUpdatesOnMain(_ updates: @escaping () -> Void) {
+    DispatchQueue.main.async {
+        updates()
+    }
+}
