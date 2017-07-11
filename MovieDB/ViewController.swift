@@ -59,6 +59,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -82,6 +86,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return MovieCell()
     }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row + 1 < topMovies.count {
+            let movie = topMovies[indexPath.row + 1]
+            
+            performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+        }
+    }
+    
+    
     
     
     /* When the + button is tapped in the bottom right hand corner of our First VC */

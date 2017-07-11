@@ -32,6 +32,19 @@ extension UIViewController {
         containerView.addSubview(image)
         
         return image
-        
     }
+    
+    /*
+     * Present the View Controller from left to right, rather than from bottom up (Default)
+     */
+    func presentDetail(viewControllerToPresent: UIViewController) {
+        
+        let transition: CATransition = CATransition()
+        transition.duration = 0.4
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        self.view.window!.layer.add(transition, forKey: kCATransition)
+    }
+    
+    
 }
