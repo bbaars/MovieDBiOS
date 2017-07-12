@@ -28,7 +28,7 @@ class MovieDetailVC: UIViewController {
 
         addGestureRecognizer()
         
-        segmentedControl.removeBorder()
+        segmentedControl.addUnderline()
         
         if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movie.posterPath)") {
             self.movieImage.af_setImage(withURL: url)
@@ -39,19 +39,44 @@ class MovieDetailVC: UIViewController {
         self.taglineLabel.text = self.movie.tagline
         runTimeLabel.text = movie.runtimeToString()
         webView.loadHTMLString("<div style=\"position:relative;height:0;padding-bottom:56.25%\"><iframe width=\"430\" height=\"208\" src=\"https://www.youtube.com/embed/\(movie.movieTrailer)?rel=0&showinfo=0&autohide=1\" frameborder=\"0\" allowfullscreen></iframe></div>", baseURL: nil)
-
+    
+    }
+    
+    func swipeAction(swipe: UISwipeGestureRecognizer) {
         
-        print("POPULARITY \(movie.popularity)")
-
+        var index = segmentedControl.selectedSegmentIndex
         
+        if index != 0 && swipe.direction == .left {
+            index -= 1
+            segmentedControl.selectedSegmentIndex = index
+            segmentedControl.changeUnderlinePosition()
+        }
+        
+        if index != 2 && swipe.direction == .right {
+            index += 1
+            segmentedControl.selectedSegmentIndex = index
+            segmentedControl.changeUnderlinePosition()
+        }
     }
     
     /* Adds the gesture recognizer to our view for us to return */
     func addGestureRecognizer() {
         
+        /* add gesture recognizer to go back to previous View Controller */
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
         edgePan.edges = .left
         view.addGestureRecognizer(edgePan)
+        
+        
+        /* Add gestures to swipe through the different tables */
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(leftSwipe)
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(rightSwipe)
+
     }
     
     /* remove the status bar from the view */
@@ -66,4 +91,27 @@ class MovieDetailVC: UIViewController {
             performSegue(withIdentifier: "backSegue", sender: nil)
         }
     }
+    @IBAction func segmentedControlDidChange(_ sender: Any) {
+        
+        segmentedControl.changeUnderlinePosition()
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

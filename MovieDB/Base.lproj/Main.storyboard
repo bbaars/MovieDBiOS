@@ -415,12 +415,15 @@
                                     <segment title="INFO"/>
                                     <segment title="CAST"/>
                                     <segment title="REVIEWS"/>
-                                    <segment title="PHOTOS"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentedControlDidChange:" destination="Cj5-qG-6DJ" eventType="valueChanged" id="iaA-d7-SIG"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eHY-dz-mQG">
                                 <rect key="frame" x="0.0" y="453" width="414" height="283"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -460,7 +463,7 @@
                         <outlet property="popularityImage" destination="as9-Df-tBh" id="KrX-Nf-ynx"/>
                         <outlet property="runTimeLabel" destination="7o9-Hr-jSU" id="tkr-am-u5V"/>
                         <outlet property="segmentedControl" destination="KwS-wO-yeN" id="Fmj-0G-qHD"/>
-                        <outlet property="tableView" destination="eHY-dz-mQG" id="Rip-n3-vs1"/>
+                        <outlet property="tableView" destination="eHY-dz-mQG" id="kgT-x7-AJB"/>
                         <outlet property="taglineLabel" destination="BNY-vF-l3b" id="clj-z4-T7D"/>
                         <outlet property="webView" destination="HAI-GR-2fZ" id="Ojo-IL-rjU"/>
                     </connections>

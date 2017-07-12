@@ -23,9 +23,35 @@ class UnderlineSegmentedControl: UISegmentedControl {
         self.setDividerImage(dividerImage, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
         self.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.gray], for: .normal)
         self.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 0/255, green: 211/255, blue: 115/255, alpha: 1.0)], for: .selected)
-        
     }
-
+    
+    func addUnderline() {
+        self.removeBorder()
+        
+        /* create our underline by width, Height, X and Y Positions */
+        let underlineWidth = self.bounds.size.width / CGFloat(self.numberOfSegments)
+        let underlineHeight: CGFloat = 2.0
+        let underlineXPos = CGFloat(selectedSegmentIndex * Int(underlineWidth))
+        let underlineYPos = self.bounds.size.height - 1.0
+        let underlineFrame = CGRect(x: underlineXPos, y: underlineYPos, width: underlineWidth, height: underlineHeight)
+        
+        /* add the underlineFrame to our underline view */
+        let underline = UIView(frame: underlineFrame)
+        underline.backgroundColor = UIColor(red: 0/255, green: 211/255, blue: 115/255, alpha: 1.0)
+        underline.tag = 1
+        self.addSubview(underline)
+    }
+    
+    func changeUnderlinePosition() {
+        
+        guard let underline = self.viewWithTag(1) else {return}
+        
+        let underlineFinalXPos = (self.bounds.width) / CGFloat(self.numberOfSegments) * CGFloat(selectedSegmentIndex)
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            underline.frame.origin.x = underlineFinalXPos
+        })
+    }
 }
 
 extension UIImage {
