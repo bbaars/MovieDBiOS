@@ -368,6 +368,7 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1star" translatesAutoresizingMaskIntoConstraints="NO" id="as9-Df-tBh">
                                 <rect key="frame" x="158" y="277" width="86" height="27"/>
+                                <color key="tintColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="7Z3-rd-MVL"/>
                                     <constraint firstAttribute="width" constant="86" id="hPd-S1-KPn"/>

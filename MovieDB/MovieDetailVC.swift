@@ -20,14 +20,14 @@ class MovieDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UnderlineSegmentedControl!
     
-    var movie: Movie!
     
+    var movie: Movie!
+    var vote: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        addGestureRecognizer()
         
+        addGestureRecognizer()
         segmentedControl.addUnderline()
         
         if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movie.posterPath)") {
@@ -39,7 +39,29 @@ class MovieDetailVC: UIViewController {
         self.taglineLabel.text = self.movie.tagline
         runTimeLabel.text = movie.runtimeToString()
         webView.loadHTMLString("<div style=\"position:relative;height:0;padding-bottom:56.25%\"><iframe width=\"430\" height=\"208\" src=\"https://www.youtube.com/embed/\(movie.movieTrailer)?rel=0&showinfo=0&autohide=1\" frameborder=\"0\" allowfullscreen></iframe></div>", baseURL: nil)
+        updateVoteImage()
+    }
     
+    func updateVoteImage() {
+        
+        /* finds the decimal of the number */
+        let decimal = movie.voteAverage.truncatingRemainder(dividingBy: 1)
+        var stars:Int = 0
+        
+        /* if the decimal is higher than 5, we round up */
+        if decimal >= 0.5 {
+            ceil(movie.voteAverage)
+            stars = Int(ceil(movie.voteAverage) / 2)
+        } else {
+             stars = Int(movie.voteAverage / 2)
+        }
+
+        /* depending on the number of stars we set our image */
+        if stars > 0 {
+            popularityImage.image = UIImage(named: "\(stars)star")
+        } else {
+            popularityImage.image = UIImage(named: "empty")
+        }
     }
     
     func swipeAction(swipe: UISwipeGestureRecognizer) {
