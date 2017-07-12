@@ -357,7 +357,7 @@
                                     <segue destination="Be5-fu-y6e" kind="unwind" identifier="backSegue" customClass="SegueFromLeft" customModule="MovieDB" customModuleProvider="target" unwindAction="unwindWithSegue:" id="6dT-Ko-RSV"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Beauty and the beast" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WC-hT-p4l">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Beauty and the beast" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WC-hT-p4l">
                                 <rect key="frame" x="158" y="208" width="236" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="uGi-mM-Xak"/>
@@ -374,7 +374,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2h 49min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7o9-Hr-jSU">
-                                <rect key="frame" x="267" y="284" width="120" height="15"/>
+                                <rect key="frame" x="268" y="284" width="120" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Dfl-VN-mPL"/>
                                     <constraint firstAttribute="height" constant="15" id="MT0-4F-xBA"/>
@@ -406,7 +406,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-wO-yeN">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-wO-yeN" customClass="UnderlineSegmentedControl" customModule="MovieDB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="417" width="414" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="nvs-eO-497"/>
@@ -421,16 +421,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eHY-dz-mQG">
                                 <rect key="frame" x="0.0" y="453" width="414" height="283"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="ySk-uu-3Ou">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="106"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ySk-uu-3Ou" id="7XT-7v-wMa">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="106"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -452,7 +442,6 @@
                             <constraint firstItem="KwS-wO-yeN" firstAttribute="top" secondItem="BNY-vF-l3b" secondAttribute="bottom" constant="8" id="Qhw-1U-TYG"/>
                             <constraint firstItem="as9-Df-tBh" firstAttribute="leading" secondItem="0WC-hT-p4l" secondAttribute="leading" id="THi-ks-c0l"/>
                             <constraint firstItem="as9-Df-tBh" firstAttribute="leading" secondItem="Zo9-VZ-dno" secondAttribute="trailing" constant="8" id="WXs-F4-kfi"/>
-                            <constraint firstItem="7o9-Hr-jSU" firstAttribute="leading" secondItem="SdE-UJ-a5K" secondAttribute="trailing" constant="4" id="bL0-nX-YYR"/>
                             <constraint firstItem="Xt2-FZ-Nl1" firstAttribute="top" secondItem="eHY-dz-mQG" secondAttribute="bottom" id="bYq-aW-wBn"/>
                             <constraint firstItem="SdE-UJ-a5K" firstAttribute="top" secondItem="0WC-hT-p4l" secondAttribute="bottom" constant="15" id="ezQ-CC-UAY"/>
                             <constraint firstItem="Lbr-kk-73C" firstAttribute="top" secondItem="zIQ-Jc-5U9" secondAttribute="bottom" constant="16" id="g8e-ib-k8O"/>
@@ -470,6 +459,7 @@
                         <outlet property="movieTitle" destination="0WC-hT-p4l" id="qVr-R0-EEX"/>
                         <outlet property="popularityImage" destination="as9-Df-tBh" id="KrX-Nf-ynx"/>
                         <outlet property="runTimeLabel" destination="7o9-Hr-jSU" id="tkr-am-u5V"/>
+                        <outlet property="segmentedControl" destination="KwS-wO-yeN" id="Fmj-0G-qHD"/>
                         <outlet property="tableView" destination="eHY-dz-mQG" id="Rip-n3-vs1"/>
                         <outlet property="taglineLabel" destination="BNY-vF-l3b" id="clj-z4-T7D"/>
                         <outlet property="webView" destination="HAI-GR-2fZ" id="Ojo-IL-rjU"/>

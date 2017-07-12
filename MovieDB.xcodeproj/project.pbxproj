@@ -25,6 +25,7 @@
 		CAE918111F10466C005A8071 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE918101F10466C005A8071 /* UIViewX.swift */; };
 		CAE918131F1052B2005A8071 /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE918121F1052B2005A8071 /* Credit.swift */; };
 		CAF054FB1F15872C000BB584 /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF054FA1F15872C000BB584 /* MovieDetailVC.swift */; };
+		CAF054FD1F165E52000BB584 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF054FC1F165E52000BB584 /* UnderlineSegmentedControl.swift */; };
 		CAF66B2A1F13D04C00A37B26 /* notAvailable.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CAF66B291F13D04C00A37B26 /* notAvailable.jpg */; };
 		CAF66B2E1F13EE0B00A37B26 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF66B2D1F13EE0B00A37B26 /* MovieCell.swift */; };
 		CAF66B301F14089600A37B26 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF66B2F1F14089600A37B26 /* UIImageViewX.swift */; };
@@ -80,6 +81,7 @@
 		CAE918101F10466C005A8071 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
 		CAE918121F1052B2005A8071 /* Credit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		CAF054FA1F15872C000BB584 /* MovieDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
+		CAF054FC1F165E52000BB584 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		CAF66B291F13D04C00A37B26 /* notAvailable.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notAvailable.jpg; sourceTree = "<group>"; };
 		CAF66B2D1F13EE0B00A37B26 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		CAF66B2F1F14089600A37B26 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				CA6190151F0442C700805A59 /* Main.storyboard */,
 				CAFB15571F114D5400332131 /* RoundImageWithShadow.swift */,
 				CAF66B2D1F13EE0B00A37B26 /* MovieCell.swift */,
+				CAF054FC1F165E52000BB584 /* UnderlineSegmentedControl.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -233,8 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				CA6190131F0442C700805A59 /* ViewController.swift */,
-				CA6190111F0442C700805A59 /* AppDelegate.swift */,
 				CAF054FA1F15872C000BB584 /* MovieDetailVC.swift */,
+				CA6190111F0442C700805A59 /* AppDelegate.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				CAF66B2E1F13EE0B00A37B26 /* MovieCell.swift in Sources */,
 				CAE918131F1052B2005A8071 /* Credit.swift in Sources */,
 				CAE9180F1F1040D5005A8071 /* UIButtonX.swift in Sources */,
+				CAF054FD1F165E52000BB584 /* UnderlineSegmentedControl.swift in Sources */,
 				CA5508F91F103C6C004AEAB0 /* FloatingActionButton.swift in Sources */,
 				CA6190121F0442C700805A59 /* AppDelegate.swift in Sources */,
 				CAE918111F10466C005A8071 /* UIViewX.swift in Sources */,

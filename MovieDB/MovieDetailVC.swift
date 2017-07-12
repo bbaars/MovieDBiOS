@@ -18,6 +18,7 @@ class MovieDetailVC: UIViewController {
     @IBOutlet weak var runTimeLabel: UILabel!
     @IBOutlet weak var taglineLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UnderlineSegmentedControl!
     
     var movie: Movie!
     
@@ -27,6 +28,8 @@ class MovieDetailVC: UIViewController {
 
         addGestureRecognizer()
         
+        segmentedControl.removeBorder()
+        
         if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movie.posterPath)") {
             self.movieImage.af_setImage(withURL: url)
         }
@@ -35,7 +38,8 @@ class MovieDetailVC: UIViewController {
         self.movieTitle.text = self.movie.title
         self.taglineLabel.text = self.movie.tagline
         runTimeLabel.text = movie.runtimeToString()
-        webView.loadHTMLString("<div style=\"position:relative;height:0;padding-bottom:56.25%\"><iframe src=\"https://www.youtube.com/embed/\(movie.movieTrailer)?ecver=2\" width=\"640\" height=\"360\" frameborder=\"0\" style=\"position:absolute;width:100%;height:100%;left:0\"></iframe></div>", baseURL: nil)
+        webView.loadHTMLString("<div style=\"position:relative;height:0;padding-bottom:56.25%\"><iframe width=\"430\" height=\"208\" src=\"https://www.youtube.com/embed/\(movie.movieTrailer)?rel=0&showinfo=0&autohide=1\" frameborder=\"0\" allowfullscreen></iframe></div>", baseURL: nil)
+
         
         print("POPULARITY \(movie.popularity)")
 
