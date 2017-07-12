@@ -23,6 +23,8 @@ class MovieCell: UITableViewCell  {
         print(movie.title)
         print(movie.overview)
         
+        self.selectionStyle = .none
+        
         if let url = URL(string: "\(imageUrlPrefix)w500/\(movie.posterPath)") {
             self.movieImage.af_setImage(withURL: url)
         }

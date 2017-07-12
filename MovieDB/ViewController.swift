@@ -25,59 +25,80 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     /* Array of top movies */
     var topMovies: [Movie] = [Movie]()
     
+    /* Array of Extra Movie Details */
+    var movieDetails: [Movie] = [Movie]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.delegate = self
+       
         loadDetails()
         closeMenu()
         
         let img = UIImage(named: "notAvailable")
         self.image.image = img
+    }
+    
+    @IBAction func unwind(segue: UIStoryboardSegue) {
         
-        
+    }
+    
+    /* If the user taps on the Top Movie */
+    @IBAction func moreButtonTapped(_ sender: Any) {
+        let movie = movieDetails[0]
+        performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+    }
+    
+    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        let segue = SegueFromLeft(identifier: unwindSegue.identifier, source: unwindSegue.source, destination: unwindSegue.destination)
+        segue.perform()
     }
     
     func loadDetails() {
         
         let movie = MovieDBManager()
         
-        
+        /* once we download the movie details we can update our UI and reload our Table Data */
         movie.downloadMovieDBDetails(parameter: SearchTypes.popular) {
             
             self.topMovies = movie.getTopMovies()
-            if let url = URL(string: "\(imageUrlPrefix)w500/\(self.topMovies[0].posterPath)") {
+            self.movieDetails = movie.getMovieDetails()
+            if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movieDetails[0].posterPath)") {
                 self.image.af_setImage(withURL: url)
-                self.popularTitle.text = self.topMovies[0].title
-                self.popularDescription.text = self.topMovies[0].overview
+                self.popularTitle.text = self.movieDetails[0].title
+                self.popularDescription.text = self.movieDetails[0].overview
                 self.tableView.reloadData()
             }
 
+            /* adds a corner radius and drop shadow to our image */
             self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
         }
     }
     
+    
+    /* Prefer our status bar to be hidden on our view */
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
-    
+    /* Only displaying 1 section in the table view */
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    
+    /* finds how many rows in section we need based on our sizes */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return topMovies.count - 1
+        return movieDetails.count - 1
     }
     
     
+    /* Configures the table to display popular  movies, top rated movies, and actors */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row + 1 < topMovies.count {
-            let movie = topMovies[indexPath.row + 1]
+        if indexPath.row + 1 < movieDetails.count {
+            let movie = movieDetails[indexPath.row + 1]
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieCell {
                 cell.configureCell(movie: movie)
@@ -88,12 +109,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    /* Used to see which row the user clicks on. When they click on it, we obtain that movie info 
+        and prepare to segue */
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row + 1 < topMovies.count {
-            let movie = topMovies[indexPath.row + 1]
+        if indexPath.row + 1 < movieDetails.count {
+            let movie = movieDetails[indexPath.row + 1]
             
             performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+        }
+    }
+    
+    /* When we click on a table row, we will send that information to our Detail VC */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? MovieDetailVC {
+            if let movie = sender as? Movie {
+                destination.movie = movie
+            }
         }
     }
     

@@ -26,6 +26,7 @@ class MovieDBManager {
     var topMovies = [Movie]()
     var detailedTopMovies = [Movie]()
     var moviePoster = [String:URL]()
+    var count = 0
     
     /* parameter that could be entered in the API Request */
     fileprivate var parameters: Dictionary<String, Any> = [
@@ -71,7 +72,12 @@ class MovieDBManager {
                         
                         if let id = movie[movieKeys.ID] {
                             self.downloadMoreMovieDetails(url: "\(APIUrlPrefix)/movie/\(id)?api_key=") {
+                                self.count += 1
                                 
+                                if self.count == results.count {
+                                    completed()
+                                     print("Completed")
+                                }
                             }
                         }
                         
@@ -141,9 +147,6 @@ class MovieDBManager {
                     }
                 }
             }
-            
-            completed()
-            print("Completed")
         }
     }
     
