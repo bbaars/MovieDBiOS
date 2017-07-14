@@ -24,6 +24,7 @@ struct movieKeys {
     static let Adult = "adult"
     static let BackdropPath = "backdrop_path"
     static let Budget = "budget"
+    static let Genres = "genres"
     static let Homepage = "homepage"
     static let ID = "id"
     static let IMDBID = "imdb_id"
@@ -44,6 +45,19 @@ struct movieKeys {
     static let VoteCount = "vote_count"
 }
 
+struct actorKeys {
+    static let Adult = "adult"
+    static let Biography = "biography"
+    static let Birthday = "birthday"
+    static let Deathday = "deathday"
+    static let Gender = "gender"
+    static let Homepage = "homepage"
+    static let ID = "id"
+    static let Name = "name"
+    static let PlaceOfBirth = "place_of_birth"
+    static let Popularity = "popularity"
+    static let ProfilePath = "profile_path"
+}
 
 struct SearchTypes {
     static let popular = "/movie/popular"

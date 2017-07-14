@@ -19,6 +19,9 @@ class MovieDetailVC: UIViewController {
     @IBOutlet weak var taglineLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UnderlineSegmentedControl!
+    @IBOutlet weak var genreLabel1: UILabel!
+    @IBOutlet weak var genreLabel2: UILabel!
+    @IBOutlet weak var genreLabel3: UILabel!
     
     
     var movie: Movie!
@@ -29,11 +32,45 @@ class MovieDetailVC: UIViewController {
         
         addGestureRecognizer()
         segmentedControl.addUnderline()
+        setupUI()
+    }
+    
+    func setupUI() {
+        
+        genreLabel1.isHidden = true
+        genreLabel2.isHidden = true
+        genreLabel3.isHidden = true
         
         if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movie.posterPath)") {
             self.movieImage.af_setImage(withURL: url)
         }
         
+        var count = 0
+        for genre in self.movie.genre {
+            if let name = genre["name"] as? String {
+                if count == 0 {
+                    genreLabel1.isHidden = false
+                    genreLabel1.text = name
+                    genreLabel1.layer.borderWidth = 2.0
+                    genreLabel1.layer.borderColor = UIColor.lightGray.cgColor
+                    genreLabel1.layer.cornerRadius = 3.0
+                } else if count == 2 {
+                    genreLabel2.isHidden = false
+                    genreLabel2.text = name
+                    genreLabel2.layer.borderWidth = 2.0
+                    genreLabel2.layer.borderColor = UIColor.lightGray.cgColor
+                    genreLabel2.layer.cornerRadius = 3.0
+                } else if count == 3 {
+                    genreLabel3.isHidden = false
+                    genreLabel3.text = name
+                    genreLabel3.layer.borderWidth = 2.0
+                    genreLabel3.layer.borderColor = UIColor.lightGray.cgColor
+                    genreLabel3.layer.cornerRadius = 3.0
+                }
+                
+                count += 1
+            }
+        }
         self.movieImage = self.addCornersAndDropShadow(image: self.movieImage, imgRadius: 10.0, radius: 5.0, offset: 2.0)
         self.movieTitle.text = self.movie.title
         self.taglineLabel.text = self.movie.tagline
@@ -68,13 +105,13 @@ class MovieDetailVC: UIViewController {
         
         var index = segmentedControl.selectedSegmentIndex
         
-        if index != 0 && swipe.direction == .left {
+        if index != 0 && swipe.direction == .right {
             index -= 1
             segmentedControl.selectedSegmentIndex = index
             segmentedControl.changeUnderlinePosition()
         }
         
-        if index != 2 && swipe.direction == .right {
+        if index != 2 && swipe.direction == .left {
             index += 1
             segmentedControl.selectedSegmentIndex = index
             segmentedControl.changeUnderlinePosition()

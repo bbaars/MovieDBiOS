@@ -22,9 +22,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     /* Our poster image */
     var posterImage: UIImage!
     
-    /* Array of top movies */
-    var topMovies: [Movie] = [Movie]()
-    
     /* Array of Extra Movie Details */
     var movieDetails: [Movie] = [Movie]()
     
@@ -63,7 +60,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         /* once we download the movie details we can update our UI and reload our Table Data */
         movie.downloadMovieDBDetails(parameter: SearchTypes.popular) {
             
-            self.topMovies = movie.getTopMovies()
             self.movieDetails = movie.getMovieDetails()
             if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movieDetails[0].posterPath)") {
                 self.image.af_setImage(withURL: url)
@@ -149,12 +145,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         /* CGAFFINE : preserve parallel relationships -> 1, 1 leaves it the same size. */
         self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 

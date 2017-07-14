@@ -14,6 +14,7 @@ class Movie {
     private var _adult: Bool?
     private var _backdropPath: String?
     private var _budget: String?
+    private var _genre: [[String:Any]]?
     private var _homepage: String?
     private var _id: Int?
     private var _imdbId: String?
@@ -56,6 +57,14 @@ class Movie {
         }
         
         return _budget!
+    }
+    
+    var genre: [[String:Any]] {
+        if _genre == nil {
+            return [["":0]]
+        }
+        
+        return _genre!
     }
     
     var homepage: String {
@@ -213,6 +222,7 @@ class Movie {
         _adult = dict[movieKeys.Adult] as? Bool
         _backdropPath = dict[movieKeys.BackdropPath] as? String
         _budget = dict[movieKeys.Budget] as? String
+        _genre = dict[movieKeys.Genres] as? [[String:Any]]
         _homepage = dict[movieKeys.Homepage] as? String
         _id = dict[movieKeys.ID] as? Int
         _imdbId = dict[movieKeys.IMDBID] as? String

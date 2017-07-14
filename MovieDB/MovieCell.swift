@@ -18,20 +18,17 @@ class MovieCell: UITableViewCell  {
     
     
     func configureCell(movie: Movie) {
-        
-        print(movie.posterPath)
-        print(movie.title)
-        print(movie.overview)
-        
+    
+        /* no highlighting when the cell has been tapped */
         self.selectionStyle = .none
         
+        /* obtains the url and sets the movie image */
         if let url = URL(string: "\(imageUrlPrefix)w500/\(movie.posterPath)") {
             self.movieImage.af_setImage(withURL: url)
         }
         
+        /* sets the title and description of the movie */
         self.movieTitle.text = movie.title
         self.movieDescription.text = movie.overview
     }
-    
-
 }

@@ -13,6 +13,9 @@ import AlamofireImage
 
 /*  Example Movie Request
  https://api.themoviedb.org/3/discover/movie?with_people=287,819&sort_by=vote_average.desc&api_key=6615c9824f812a6fb9b8b4ea5f49a285
+ 
+  Using the Append to Response to get the reviews and cast of the movie
+ https://api.themoviedb.org/3/movie/157336?api_key=6615c9824f812a6fb9b8b4ea5f49a285&append_to_response=reviews,credits
  */
 
 /*  Example Image Request
@@ -21,27 +24,15 @@ import AlamofireImage
  */
 
 
+
+
 class MovieDBManager {
     
     var topMovies = [Movie]()
     var detailedTopMovies = [Movie]()
     var moviePoster = [String:URL]()
     var count = 0
-    
-    /* parameter that could be entered in the API Request */
-    fileprivate var parameters: Dictionary<String, Any> = [
-        "api_key": APIKey as Any,
-        ]
-    
-    
-    init() {
-        
-    }
-    
-    func getTopMovies() -> [Movie] {
-        return topMovies
-    }
-    
+
     func getMovieDetails() -> [Movie] {
         return detailedTopMovies
     }
@@ -54,19 +45,12 @@ class MovieDBManager {
         /* alamo fire request */
         Alamofire.request("\(APIUrlPrefix)\(parameter)?", parameters: ["api_key": APIKey]).responseJSON { response in
             
-            // print(response)
-            
             /* Obtains the dictionary representation of the JSON */
             if let dict = response.result.value as? [String:Any] {
                 
-                
                 /* part of the JSON data is 'results' which is an array of dictionaries */
                 if let results = dict["results"] as? [[String:Any]] {
-                    
-                    
-                    /* temporary dictory for us to later add to our array of movies */
-                    var tempDict = [String:Any]()
-                    
+
                     /* loop through every received movie in results */
                     for movie in results {
                         
@@ -80,70 +64,6 @@ class MovieDBManager {
                                 }
                             }
                         }
-                        
-                        /* if these  optional values exist, we can set them */
-                        if let adult = movie[movieKeys.Adult] as? Bool {
-                            tempDict[movieKeys.Adult] = adult
-                        }
-                        
-                        if let backdropPath = movie[movieKeys.BackdropPath] as? String {
-                            tempDict[movieKeys.BackdropPath] = backdropPath
-                        }
- 
-                        if let id = movie[movieKeys.ID] as? Int {
-                            tempDict[movieKeys.ID] = id
-                        }
-                        
-                        if let imdbId = movie[movieKeys.IMDBID] as? String {
-                            tempDict[movieKeys.IMDBID] = imdbId
-                        }
-                        
-                        if let originalLang = movie[movieKeys.OriginalLanguage] as? String {
-                            tempDict[movieKeys.OriginalLanguage] = originalLang
-                        }
-                        
-                        if let originalTitle = movie[movieKeys.OriginalTitle] as? String {
-                            tempDict[movieKeys.OriginalTitle] = originalTitle
-                        }
-                        
-                        if let overview = movie[movieKeys.Overview] as? String {
-                            tempDict[movieKeys.Overview] = overview
-                        }
-                        
-                        if let popularity = movie[movieKeys.Popularity] as? Double {
-                            tempDict[movieKeys.Popularity] = popularity
-                        }
-                        
-                        if let posterPath = movie[movieKeys.PosterPath] as? String {
-                            tempDict[movieKeys.PosterPath] = posterPath
-                        }
-                        
-                        if let releaseDate = movie[movieKeys.ReleaseDate] as? String {
-                            tempDict[movieKeys.ReleaseDate] = releaseDate
-                        }
-
-                        if let status = movie[movieKeys.Status] as? String {
-                            tempDict[movieKeys.Status] = status
-                        }
-                        
-                        if let title = movie[movieKeys.Title] as? String {
-                            tempDict[movieKeys.Title] = title
-                        }
-                        
-                        if let video =  movie[movieKeys.Video] as? Bool {
-                            tempDict[movieKeys.Video] = video
-                        }
-                        
-                        if let voteAvg = movie[movieKeys.VoteAverage] as? Double {
-                            tempDict[movieKeys.VoteAverage] = voteAvg
-                        }
-                        
-                        if let voteCount = movie[movieKeys.VoteCount] as? Int {
-                            tempDict[movieKeys.VoteCount] = voteCount
-                        }
-                        
-                        self.topMovies.append(Movie(dict: tempDict))
-                        tempDict.removeAll()
                     }
                 }
             }
@@ -175,6 +95,28 @@ class MovieDBManager {
                 
                 if let budget = movie[movieKeys.Budget] as? String {
                     tempDict[movieKeys.Budget] = budget
+                }
+                
+                if let genres = movie[movieKeys.Genres] as? [[String:Any]] {
+                    var genreString = [[String:Any]]()
+                    
+                    for genre in genres {
+                        
+                        var tempGenres = [String:Any]()
+                        
+                        if let id = genre["id"] as? Int {
+                            tempGenres["id"] = id
+                        }
+                        
+                        if let name = genre["name"] as? String {
+                            tempGenres["name"] = name
+                        }
+                        
+                        genreString.append(tempGenres)
+                        tempGenres.removeAll()
+                    }
+                    
+                    tempDict[movieKeys.Genres] = genreString
                 }
                 
                 if let homepage = movie[movieKeys.Homepage] as? String {

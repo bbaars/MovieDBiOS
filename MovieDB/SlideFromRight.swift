@@ -31,7 +31,7 @@ class SegueFromRight: UIStoryboardSegue {
         appWindow?.insertSubview(dst!, aboveSubview: src!)
 
         /* we animate our view in 0.3s and curve ease into view */
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
             
             src?.frame = (src?.frame.offsetBy(dx: -screenWidth, dy: 0))!
             dst?.frame = (dst?.frame.offsetBy(dx: -screenWidth, dy: 0))!
@@ -65,7 +65,7 @@ class SegueFromLeft: UIStoryboardSegue {
         appWindow?.insertSubview(dst!, aboveSubview: src!)
         
         /* we animate our view in 0.3s and curve ease into view */
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {
             
             src?.frame = (src?.frame.offsetBy(dx: screenWidth, dy: 0))!
             dst?.frame = (dst?.frame.offsetBy(dx: screenWidth, dy: 0))!
