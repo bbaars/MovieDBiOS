@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movieDBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="dm3-61-f8I">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MovieDBLogo" translatesAutoresizingMaskIntoConstraints="NO" id="dm3-61-f8I">
                                 <rect key="frame" x="89" y="281" width="196" height="104"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="196" id="LyG-Nk-ncJ"/>
@@ -42,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="movieDBLogo" width="91" height="81"/>
+        <image name="MovieDBLogo" width="252" height="223"/>
     </resources>
 </document>

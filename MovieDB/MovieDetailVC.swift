@@ -33,6 +33,8 @@ class MovieDetailVC: UIViewController {
         addGestureRecognizer()
         segmentedControl.addUnderline()
         setupUI()
+        
+        
     }
     
     func setupUI() {

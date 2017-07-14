@@ -43,7 +43,13 @@ class MovieDBManager {
     func downloadMovieDBDetails(parameter: String, completed: @escaping DownloadComplete) {
         
         /* alamo fire request */
-        Alamofire.request("\(APIUrlPrefix)\(parameter)?", parameters: ["api_key": APIKey]).responseJSON { response in
+        Alamofire.download("\(APIUrlPrefix)\(parameter)?", parameters: ["api_key": APIKey])
+            
+            .downloadProgress { progress in
+                
+                print("Download Progress: \(progress.fractionCompleted)")
+            }
+            .responseJSON {response in
             
             /* Obtains the dictionary representation of the JSON */
             if let dict = response.result.value as? [String:Any] {
@@ -76,10 +82,12 @@ class MovieDBManager {
     private func downloadMoreMovieDetails(url: String, completed: @escaping DownloadComplete) {
         
         
-        Alamofire.request("\(url)\(APIKey)&append_to_response=videos").responseJSON { response in
+        Alamofire.request("\(url)\(APIKey)&append_to_response=videos,reviews,credits").responseJSON { response in
             
             /* Obtains the dictionary representation of the JSON */
             if let movie = response.result.value as? [String:Any] {
+                
+               //print (movie)
                 
                 /* temporary dictory for us to later add to our array of movies */
                 var tempDict = [String:Any]()
@@ -191,10 +199,78 @@ class MovieDBManager {
                     if let results = videos["results"] as? [[String:Any]] {
                         if let key = results[0]["key"] as? String {
                             tempDict[movieKeys.MovieTrailer] = key
-
                         }
                     }
                 }
+            
+                if let reviews = movie[movieKeys.Reviews] as? [String: Any] {
+                    if let results = reviews["results"] as? [[String:Any]] {
+                        
+                        var tempReview = [String:Any]()
+                        var reviewArray = [Review]()
+                        
+                        for result in results {
+                            
+                            
+                            if let id = result[reviewKeys.ID] as? String {
+                                tempReview[reviewKeys.ID] = id
+
+                            }
+                            
+                            if let author = result[reviewKeys.Author] as? String {
+                                tempReview[reviewKeys.Author] = author
+
+                            }
+                            
+                            if let content = result[reviewKeys.Content] as? String {
+                                tempReview[reviewKeys.Content] = content
+
+                            }
+                            
+                            if let url = result[reviewKeys.Url] as? String {
+                                tempReview[reviewKeys.Url] = url
+                            }
+                            
+                            reviewArray.append(Review(tempReview))
+                            tempReview.removeAll()
+                        }
+                        
+                        tempDict[movieKeys.Reviews] = reviewArray
+                    }
+                }
+                
+                if let credits = movie["credits"] as? [String:Any] {
+                    if let cast = credits["cast"] as? [[String:Any]] {
+                        
+                        var tempActor = [String:Any]()
+                        var actorArray = [Cast]()
+                        
+                        for person in cast {
+                            
+                            if let character = person["character"] as? String {
+                                tempActor["character"] = character
+                            }
+                            
+                            if let id = person["id"] as? Int {
+                                tempActor["id"] = id
+                            }
+                            
+                            if let name = person["name"] as? String {
+                                tempActor["name"] = name
+                            }
+                            
+                            if let profilePath = person["profile_path"] as? String {
+                                tempActor["profile_path"] = profilePath
+                            }
+                            
+                            actorArray.append(Cast(tempActor))
+                            tempActor.removeAll()
+                        }
+                        
+                        tempDict[movieKeys.Cast] = actorArray
+                    }
+                }
+                
                 
                 self.detailedTopMovies.append(Movie(dict: tempDict))
                 tempDict.removeAll()

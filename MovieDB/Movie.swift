@@ -14,6 +14,7 @@ class Movie {
     private var _adult: Bool?
     private var _backdropPath: String?
     private var _budget: String?
+    private var _cast: [Cast]?
     private var _genre: [[String:Any]]?
     private var _homepage: String?
     private var _id: Int?
@@ -26,6 +27,7 @@ class Movie {
     private var _posterPath: String?
     private var _releaseDate: String?
     private var _revenue: Int?
+    private var _reviews: [Review]?
     private var _runtime: Int?
     private var _status: String?
     private var _tagline: String?
@@ -33,6 +35,7 @@ class Movie {
     private var _video: Bool?
     private var _voteAverage: Double?
     private var _voteCount: Int?
+    
     
     var adult: Bool {
         
@@ -57,6 +60,14 @@ class Movie {
         }
         
         return _budget!
+    }
+    
+    var cast: [Cast] {
+        if _cast == nil {
+            return []
+        }
+        
+        return _cast!
     }
     
     var genre: [[String:Any]] {
@@ -155,6 +166,14 @@ class Movie {
         return _revenue!
     }
     
+    var reviews: [Review] {
+        if _reviews == nil {
+            return []
+        }
+        
+        return _reviews!
+    }
+    
     var runtime: Int {
         if _runtime == nil {
             return 0
@@ -222,6 +241,7 @@ class Movie {
         _adult = dict[movieKeys.Adult] as? Bool
         _backdropPath = dict[movieKeys.BackdropPath] as? String
         _budget = dict[movieKeys.Budget] as? String
+        _cast = dict[movieKeys.Cast] as? [Cast]
         _genre = dict[movieKeys.Genres] as? [[String:Any]]
         _homepage = dict[movieKeys.Homepage] as? String
         _id = dict[movieKeys.ID] as? Int
@@ -234,6 +254,7 @@ class Movie {
         _posterPath = dict[movieKeys.PosterPath] as? String
         _releaseDate = dict[movieKeys.ReleaseDate] as? String
         _revenue = dict[movieKeys.Revenue] as? Int
+        _reviews = dict[movieKeys.Reviews] as? [Review]
         _runtime = dict[movieKeys.Runtime] as? Int
         _status = dict[movieKeys.Status] as? String
         _tagline = dict[movieKeys.Tagline] as? String
@@ -241,7 +262,6 @@ class Movie {
         _video = dict[movieKeys.Video] as? Bool
         _voteAverage = dict[movieKeys.VoteAverage] as? Double
         _voteCount = dict[movieKeys.VoteCount] as? Int
-
     }
     
     func runtimeToString() -> String? {

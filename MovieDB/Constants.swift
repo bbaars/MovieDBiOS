@@ -24,6 +24,7 @@ struct movieKeys {
     static let Adult = "adult"
     static let BackdropPath = "backdrop_path"
     static let Budget = "budget"
+    static let Cast = "cast"
     static let Genres = "genres"
     static let Homepage = "homepage"
     static let ID = "id"
@@ -36,6 +37,7 @@ struct movieKeys {
     static let PosterPath = "poster_path"
     static let ReleaseDate = "release_date"
     static let Revenue = "revenue"
+    static let Reviews = "reviews"
     static let Runtime = "runtime"
     static let Status = "status"
     static let Tagline = "tagline"
@@ -59,12 +61,22 @@ struct actorKeys {
     static let ProfilePath = "profile_path"
 }
 
+struct reviewKeys {
+    static let ID = "id"
+    static let Author = "author"
+    static let Content = "content"
+    static let Url = "url"
+}
+
 struct SearchTypes {
     static let popular = "/movie/popular"
 }
 
 /* typealia for when an asynchronous function completes */
-typealias DownloadComplete = () -> ()
+public typealias DownloadComplete = () -> ()
+
+/* typealia for when an progress during download */
+public typealias ProgressHandler = (Progress) -> Void
 
 func performUIUpdatesOnMain(_ updates: @escaping () -> Void) {
     DispatchQueue.main.async {

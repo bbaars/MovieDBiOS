@@ -430,7 +430,6 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzE-j8-qbW">
                                         <rect key="frame" x="0.0" y="0.0" width="104.66666666666666" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="GNL-er-1GF"/>
                                             <constraint firstAttribute="height" constant="30" id="Q66-AV-A1Z"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
@@ -461,7 +460,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="BNY-vF-l3b" secondAttribute="trailing" constant="25" id="24S-qg-56m"/>
-                            <constraint firstItem="fga-AO-NbY" firstAttribute="leading" secondItem="1dR-Bw-Cu7" secondAttribute="leadingMargin" constant="25" id="3cq-Hk-vXJ"/>
                             <constraint firstAttribute="trailing" secondItem="HAI-GR-2fZ" secondAttribute="trailing" constant="-8" id="4DV-JU-5KR"/>
                             <constraint firstItem="KwS-wO-yeN" firstAttribute="leading" secondItem="1dR-Bw-Cu7" secondAttribute="leading" id="6Os-to-JiN"/>
                             <constraint firstItem="Lbr-kk-73C" firstAttribute="leading" secondItem="1dR-Bw-Cu7" secondAttribute="leading" constant="8" id="6y8-Nh-O0e"/>
@@ -479,10 +477,11 @@
                             <constraint firstItem="as9-Df-tBh" firstAttribute="leading" secondItem="0WC-hT-p4l" secondAttribute="leading" id="THi-ks-c0l"/>
                             <constraint firstItem="as9-Df-tBh" firstAttribute="leading" secondItem="Zo9-VZ-dno" secondAttribute="trailing" constant="8" id="WXs-F4-kfi"/>
                             <constraint firstItem="Xt2-FZ-Nl1" firstAttribute="top" secondItem="eHY-dz-mQG" secondAttribute="bottom" id="bYq-aW-wBn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fga-AO-NbY" secondAttribute="trailing" constant="25" id="e51-sn-8HC"/>
                             <constraint firstItem="SdE-UJ-a5K" firstAttribute="top" secondItem="0WC-hT-p4l" secondAttribute="bottom" constant="15" id="ezQ-CC-UAY"/>
                             <constraint firstItem="Lbr-kk-73C" firstAttribute="top" secondItem="zIQ-Jc-5U9" secondAttribute="bottom" constant="16" id="g8e-ib-k8O"/>
                             <constraint firstItem="7o9-Hr-jSU" firstAttribute="top" secondItem="0WC-hT-p4l" secondAttribute="bottom" constant="15" id="h43-kQ-cjw"/>
+                            <constraint firstItem="fga-AO-NbY" firstAttribute="leading" secondItem="1dR-Bw-Cu7" secondAttribute="leadingMargin" constant="25" id="iGP-WE-ksb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fga-AO-NbY" secondAttribute="trailing" constant="25" id="juu-e7-WBU"/>
                             <constraint firstItem="SdE-UJ-a5K" firstAttribute="leading" secondItem="as9-Df-tBh" secondAttribute="trailing" constant="5" id="kGE-Di-cXd"/>
                             <constraint firstItem="HAI-GR-2fZ" firstAttribute="leading" secondItem="1dR-Bw-Cu7" secondAttribute="leading" constant="-8" id="ks1-jU-NXy"/>
                             <constraint firstAttribute="trailing" secondItem="eHY-dz-mQG" secondAttribute="trailing" id="n4X-My-8sK"/>

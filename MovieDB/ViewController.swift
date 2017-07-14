@@ -38,6 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.image.image = img
     }
     
+    /* needed for our unwind story board segue */
     @IBAction func unwind(segue: UIStoryboardSegue) {
         
     }
@@ -123,8 +124,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
-    
     
     
     /* When the + button is tapped in the bottom right hand corner of our First VC */
