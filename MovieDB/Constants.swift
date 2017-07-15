@@ -21,6 +21,7 @@ public enum DisplayType : Int {
 }
 
 struct movieKeys {
+    
     static let Adult = "adult"
     static let BackdropPath = "backdrop_path"
     static let Budget = "budget"
@@ -48,6 +49,7 @@ struct movieKeys {
 }
 
 struct actorKeys {
+    
     static let Adult = "adult"
     static let Biography = "biography"
     static let Birthday = "birthday"

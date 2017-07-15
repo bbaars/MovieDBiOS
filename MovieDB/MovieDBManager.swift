@@ -43,7 +43,7 @@ class MovieDBManager {
     func downloadMovieDBDetails(parameter: String, completed: @escaping DownloadComplete) {
         
         /* alamo fire request */
-        Alamofire.download("\(APIUrlPrefix)\(parameter)?", parameters: ["api_key": APIKey])
+        Alamofire.request("\(APIUrlPrefix)\(parameter)?", parameters: ["api_key": APIKey])
             
             .downloadProgress { progress in
                 
@@ -86,8 +86,6 @@ class MovieDBManager {
             
             /* Obtains the dictionary representation of the JSON */
             if let movie = response.result.value as? [String:Any] {
-                
-               //print (movie)
                 
                 /* temporary dictory for us to later add to our array of movies */
                 var tempDict = [String:Any]()
@@ -231,7 +229,7 @@ class MovieDBManager {
                                 tempReview[reviewKeys.Url] = url
                             }
                             
-                            reviewArray.append(Review(tempReview))
+                            reviewArray.append(Review(dict: tempReview))
                             tempReview.removeAll()
                         }
                         
@@ -240,6 +238,7 @@ class MovieDBManager {
                 }
                 
                 if let credits = movie["credits"] as? [String:Any] {
+                    
                     if let cast = credits["cast"] as? [[String:Any]] {
                         
                         var tempActor = [String:Any]()
@@ -263,7 +262,7 @@ class MovieDBManager {
                                 tempActor["profile_path"] = profilePath
                             }
                             
-                            actorArray.append(Cast(tempActor))
+                            actorArray.append(Cast(dict: tempActor))
                             tempActor.removeAll()
                         }
                         

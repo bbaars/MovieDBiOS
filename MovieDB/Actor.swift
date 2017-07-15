@@ -112,7 +112,7 @@ class Actor {
         return _profilePath!
     }
     
-    init(_ dict: [String:Any]) {
+    init(dict: [String:Any]) {
         self.update(dict)
     }
     

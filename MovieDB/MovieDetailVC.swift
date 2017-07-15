@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class MovieDetailVC: UIViewController {
+class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var movieImage: UIImageView!
@@ -23,10 +23,15 @@ class MovieDetailVC: UIViewController {
     @IBOutlet weak var genreLabel2: UILabel!
     @IBOutlet weak var genreLabel3: UILabel!
     
-    
     var movie: Movie!
     var vote: Int = 0
-
+    var isInfo = true
+    var isCast = false
+    var isReview = false
+    
+    /*
+     * Override our view to update the UI, add the gesture recogizer and change our segmented control
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +39,11 @@ class MovieDetailVC: UIViewController {
         segmentedControl.addUnderline()
         setupUI()
         
-        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
+
     }
     
     func setupUI() {
@@ -92,9 +101,9 @@ class MovieDetailVC: UIViewController {
             ceil(movie.voteAverage)
             stars = Int(ceil(movie.voteAverage) / 2)
         } else {
-             stars = Int(movie.voteAverage / 2)
+            stars = Int(movie.voteAverage / 2)
         }
-
+        
         /* depending on the number of stars we set our image */
         if stars > 0 {
             popularityImage.image = UIImage(named: "\(stars)star")
@@ -107,17 +116,25 @@ class MovieDetailVC: UIViewController {
         
         var index = segmentedControl.selectedSegmentIndex
         
-        if index != 0 && swipe.direction == .right {
+        if index == 1 {
+            tableView.rowHeight = 140
+        } else {
+            tableView.rowHeight = UITableViewAutomaticDimension
+        }
+        
+        if index > 0 && swipe.direction == .right {
             index -= 1
             segmentedControl.selectedSegmentIndex = index
             segmentedControl.changeUnderlinePosition()
         }
         
-        if index != 2 && swipe.direction == .left {
+        if index < 2 && swipe.direction == .left {
             index += 1
             segmentedControl.selectedSegmentIndex = index
             segmentedControl.changeUnderlinePosition()
         }
+        
+        tableView.reloadData()
     }
     
     /* Adds the gesture recognizer to our view for us to return */
@@ -129,15 +146,15 @@ class MovieDetailVC: UIViewController {
         view.addGestureRecognizer(edgePan)
         
         
-        /* Add gestures to swipe through the different tables */
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
-        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(leftSwipe)
+//        /* Add gestures to swipe through the different tables */
+//        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+//        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
+//        self.view.addGestureRecognizer(leftSwipe)
+//        
+//        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+//        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+//        self.view.addGestureRecognizer(rightSwipe)
         
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
-        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(rightSwipe)
-
     }
     
     /* remove the status bar from the view */
@@ -152,9 +169,83 @@ class MovieDetailVC: UIViewController {
             performSegue(withIdentifier: "backSegue", sender: nil)
         }
     }
+    
     @IBAction func segmentedControlDidChange(_ sender: Any) {
         
+        if segmentedControl.selectedSegmentIndex == 1 {
+            tableView.rowHeight = 140
+        } else {
+            tableView.rowHeight = UITableViewAutomaticDimension
+        }
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            isInfo = true
+            isCast = false
+            isReview = false
+        }else if segmentedControl.selectedSegmentIndex == 1 {
+            isInfo = false
+            isCast = true
+            isReview = false
+        } else if segmentedControl.selectedSegmentIndex == 2 {
+            isInfo = false
+            isCast = false
+            isReview = true
+        }
+        
         segmentedControl.changeUnderlinePosition()
+        tableView.setContentOffset(CGPoint.zero, animated: false)
+        tableView.reloadData()
+    }
+    
+     /* finds how many rows in section we need based on our sizes */
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    /* finds how many rows in section we need based on our sizes */
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return 1
+        }
+        
+        if segmentedControl.selectedSegmentIndex == 1 {
+            return movie.cast.count
+        }
+        
+        if segmentedControl.selectedSegmentIndex == 2 {
+            return movie.reviews.count
+        }
+        
+        return 0
+    }
+    
+    /* Configures the table to display popular  movies, top rated movies, and actors */
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "InfoDetailCell", for: indexPath) as? MovieDetailCell {
+            
+            if isInfo {
+                cell.configureInfoCell(movie: movie)
+            }
+            if isCast {
+                let actor = movie.cast[indexPath.row]
+                cell.configureActorCell(actor: actor)
+            }
+            if isReview {
+               let review = movie.reviews[indexPath.row]
+                cell.configureNonInfoCell(review: review)
+            }
+            
+            return cell
+        }
+    
+        return MovieDetailCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+            print(movie.cast[indexPath.row].name)
     }
 }
 

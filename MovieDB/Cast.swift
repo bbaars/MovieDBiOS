@@ -50,7 +50,7 @@ class Cast {
     }
     
     
-    init(_ dict: [String:Any]) {
+    init(dict: [String:Any]) {
         update(dict)
     }
     
