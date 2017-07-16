@@ -114,26 +114,21 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func swipeAction(swipe: UISwipeGestureRecognizer) {
         
-        var index = segmentedControl.selectedSegmentIndex
-        
-        if index == 1 {
-            tableView.rowHeight = 140
-        } else {
-            tableView.rowHeight = UITableViewAutomaticDimension
-        }
+        var index = segmentedControl.selectedSegmentIndex   
         
         if index > 0 && swipe.direction == .right {
             index -= 1
             segmentedControl.selectedSegmentIndex = index
-            segmentedControl.changeUnderlinePosition()
         }
         
         if index < 2 && swipe.direction == .left {
             index += 1
             segmentedControl.selectedSegmentIndex = index
-            segmentedControl.changeUnderlinePosition()
         }
         
+        segmentedControl.changeUnderlinePosition()
+        updateTableData()
+        tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
     }
     
@@ -146,14 +141,14 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         view.addGestureRecognizer(edgePan)
         
         
-//        /* Add gestures to swipe through the different tables */
-//        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
-//        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
-//        self.view.addGestureRecognizer(leftSwipe)
-//        
-//        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
-//        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
-//        self.view.addGestureRecognizer(rightSwipe)
+        /* Add gestures to swipe through the different tables */
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+        leftSwipe.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(leftSwipe)
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+        rightSwipe.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(rightSwipe)
         
     }
     
@@ -172,6 +167,15 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBAction func segmentedControlDidChange(_ sender: Any) {
         
+        updateTableData()
+        
+        segmentedControl.changeUnderlinePosition()
+        tableView.setContentOffset(CGPoint.zero, animated: false)
+        tableView.reloadData()
+    }
+    
+    
+    func updateTableData() {
         if segmentedControl.selectedSegmentIndex == 1 {
             tableView.rowHeight = 140
         } else {
@@ -191,10 +195,6 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             isCast = false
             isReview = true
         }
-        
-        segmentedControl.changeUnderlinePosition()
-        tableView.setContentOffset(CGPoint.zero, animated: false)
-        tableView.reloadData()
     }
     
      /* finds how many rows in section we need based on our sizes */
@@ -214,6 +214,10 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         if segmentedControl.selectedSegmentIndex == 2 {
+            
+            if movie.reviews.count == 0 {
+                return 1
+            }
             return movie.reviews.count
         }
         
@@ -233,8 +237,12 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.configureActorCell(actor: actor)
             }
             if isReview {
-               let review = movie.reviews[indexPath.row]
-                cell.configureNonInfoCell(review: review)
+                if movie.reviews.count > 0 {
+                    let review = movie.reviews[indexPath.row]
+                    cell.configureNonInfoCell(review: review)
+                } else {
+                    cell.configureEmptyInfoCell()
+                }
             }
             
             return cell

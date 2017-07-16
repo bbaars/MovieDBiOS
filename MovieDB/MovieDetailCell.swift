@@ -67,14 +67,15 @@ class MovieDetailCell: UITableViewCell {
         actorName.isHidden = true
         infoLabel.isHidden = false
         characterLabel.isHidden = true
-        
-        if review.content != "" {
-             infoLabel.text = "A Review By: \(review.author) \n" + review.content
-        } else {
-            infoLabel.text = "Sorry, no reviews exists"
-        }
+        infoLabel.text = "A Review By: \(review.author) \n" + review.content
 
-
-       
+    }
+    
+    func configureEmptyInfoCell() {
+        actorImage.isHidden = true
+        actorName.isHidden = true
+        infoLabel.isHidden = false
+        characterLabel.isHidden = true
+        infoLabel.text = "There are no reviews at this time"
     }
 }
