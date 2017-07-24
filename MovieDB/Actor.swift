@@ -18,6 +18,7 @@ class Actor {
     private var _gender: Int?
     private var _homepage: String?
     private var _id: Int?
+    private var _movies: [Movie]?
     private var _name: String?
     private var _placeOfBirth: String?
     private var _popularity: Double?
@@ -80,6 +81,14 @@ class Actor {
         return _id!
     }
     
+    var movies: [Movie] {
+        if _movies == nil {
+            return []
+        }
+        
+        return _movies!
+    }
+    
     var name: String {
         if _name == nil {
             return ""
@@ -125,6 +134,7 @@ class Actor {
         _gender = dict[actorKeys.Gender] as? Int
         _homepage = dict[actorKeys.Homepage] as? String
         _id = dict[actorKeys.ID] as? Int
+        _movies = dict[actorKeys.Movies] as? [Movie]
         _name = dict[actorKeys.Name] as? String
         _placeOfBirth = dict[actorKeys.PlaceOfBirth] as? String
         _popularity = dict[actorKeys.Popularity] as? Double

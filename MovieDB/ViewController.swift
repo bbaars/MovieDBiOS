@@ -17,6 +17,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var popularTitle: UILabel!
     @IBOutlet weak var popularDescription: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sideMenuView: UIView!
+    @IBOutlet weak var screenCoverButton: UIButton!
+    @IBOutlet weak var menuCurveImageView: UIImageView!
+    @IBOutlet weak var menuLogo: UIImageView!
+    @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var accountButton: UIButton!
+    @IBOutlet weak var twitterButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     
     
     /* Our poster image */
@@ -28,15 +36,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addGestureRecognizer()
+
         tableView.dataSource = self
         tableView.delegate = self
-       
+        menuCurveImageView.image = #imageLiteral(resourceName: "MenuCurve")
         loadDetails()
-        closeMenu()
-        
         let img = UIImage(named: "notAvailable")
         self.image.image = img
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        hideMenu()
+        closeMenu()
+    }
+    
+    func addGestureRecognizer() {
+        
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(swipeAction(swipe:)))
+        edgePan.edges = .left
+        view.addGestureRecognizer(edgePan)
+        
+    }
+    
+    func swipeAction(swipe: UISwipeGestureRecognizer) {
+        if swipe.state == .recognized {
+            showMenu();
+        }
+    }
+    
     
     /* needed for our unwind story board segue */
     @IBAction func unwind(segue: UIStoryboardSegue) {
@@ -57,6 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadDetails() {
         
         let movie = MovieDBManager()
+        let actor = ActorDBManager()
         
         /* once we download the movie details we can update our UI and reload our Table Data */
         movie.downloadMovieDBDetails(parameter: SearchTypes.popular) {
@@ -70,8 +100,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
 
             /* adds a corner radius and drop shadow to our image */
-            self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
+            //self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
         }
+        
+        actor.downloadActorDetails(actorID: "500") { 
+            
+            print("Completed Actor Download")
+        }
+        
     }
     
     
@@ -144,6 +180,82 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         /* CGAFFINE : preserve parallel relationships -> 1, 1 leaves it the same size. */
         self.menuView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+    }
+    
+    @IBAction func sideMenuTapped(_ sender: Any) {
+        showMenu();
+    }
+    
+    
+    @IBAction func screenCoverButtonTapped(_ sender: Any) {
+        hideMenu();
+    }
+    
+    func showMenu() {
+        
+        sideMenuView.isHidden = false
+        
+        UIView.animate(withDuration: 0.4) {
+            self.screenCoverButton.alpha = 1
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.06, options: .curveEaseOut, animations: {
+            self.menuCurveImageView.transform = .identity
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.settingButton.transform = .identity
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.06, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.twitterButton.transform = .identity
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.12, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.accountButton.transform = .identity
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.18, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.homeButton.transform = .identity
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.24, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.menuLogo.transform = .identity
+        })
+    }
+    
+    func hideMenu() {
+        
+        UIView.animate(withDuration: 0.4) {
+            self.screenCoverButton.alpha = 0
+        }
+        
+        UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.menuLogo.transform = CGAffineTransform(translationX: -self.menuView.frame.width - 100, y: 0)
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.08, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.homeButton.transform = CGAffineTransform(translationX: -self.menuView.frame.width - 100, y: 0)
+        })
+        
+        UIView.animate(withDuration: 0.5, delay: 0.18, options: .curveEaseOut, animations: {
+            self.menuCurveImageView.transform = CGAffineTransform(translationX: -self.menuCurveImageView.frame.width - 100, y: 0)
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.16, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.accountButton.transform = CGAffineTransform(translationX: -self.menuView.frame.width - 100, y: 0)
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.21, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.twitterButton.transform = CGAffineTransform(translationX: -self.menuView.frame.width - 100, y: 0)
+        })
+        
+        UIView.animate(withDuration: 0.4, delay: 0.25, options: [.curveEaseOut, .allowUserInteraction], animations: {
+            self.settingButton.transform = CGAffineTransform(translationX: -self.menuView.frame.width - 100, y: 0)
+        }) { success in
+            self.sideMenuView.isHidden = true
+        }
+    
     }
 }
 

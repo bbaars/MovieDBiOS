@@ -57,6 +57,7 @@ struct actorKeys {
     static let Gender = "gender"
     static let Homepage = "homepage"
     static let ID = "id"
+    static let Movies = "movies"
     static let Name = "name"
     static let PlaceOfBirth = "place_of_birth"
     static let Popularity = "popularity"

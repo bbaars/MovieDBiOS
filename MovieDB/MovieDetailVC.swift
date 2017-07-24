@@ -126,8 +126,8 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             segmentedControl.selectedSegmentIndex = index
         }
         
-        segmentedControl.changeUnderlinePosition()
         updateTableData()
+        segmentedControl.changeUnderlinePosition()
         tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
     }
@@ -168,7 +168,6 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBAction func segmentedControlDidChange(_ sender: Any) {
         
         updateTableData()
-        
         segmentedControl.changeUnderlinePosition()
         tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
@@ -176,6 +175,7 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     func updateTableData() {
+        
         if segmentedControl.selectedSegmentIndex == 1 {
             tableView.rowHeight = 140
         } else {
