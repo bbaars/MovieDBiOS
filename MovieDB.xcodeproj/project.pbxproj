@@ -28,6 +28,7 @@
 		CAF054FB1F15872C000BB584 /* MovieDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF054FA1F15872C000BB584 /* MovieDetailVC.swift */; };
 		CAF054FD1F165E52000BB584 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF054FC1F165E52000BB584 /* UnderlineSegmentedControl.swift */; };
 		CAF055011F169210000BB584 /* ActorDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF055001F169210000BB584 /* ActorDBManager.swift */; };
+		CAF44FC71F27FBF8001DCF68 /* ActorDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF44FC61F27FBF8001DCF68 /* ActorDetailVC.swift */; };
 		CAF66B2E1F13EE0B00A37B26 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF66B2D1F13EE0B00A37B26 /* MovieCell.swift */; };
 		CAF66B301F14089600A37B26 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF66B2F1F14089600A37B26 /* UIImageViewX.swift */; };
 		CAF66B321F1427A000A37B26 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF66B311F1427A000A37B26 /* Genre.swift */; };
@@ -87,6 +88,7 @@
 		CAF054FA1F15872C000BB584 /* MovieDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailVC.swift; sourceTree = "<group>"; };
 		CAF054FC1F165E52000BB584 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		CAF055001F169210000BB584 /* ActorDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorDBManager.swift; sourceTree = "<group>"; };
+		CAF44FC61F27FBF8001DCF68 /* ActorDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorDetailVC.swift; sourceTree = "<group>"; };
 		CAF66B2D1F13EE0B00A37B26 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		CAF66B2F1F14089600A37B26 /* UIImageViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
 		CAF66B311F1427A000A37B26 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				CA6190131F0442C700805A59 /* ViewController.swift */,
 				CAF054FA1F15872C000BB584 /* MovieDetailVC.swift */,
+				CAF44FC61F27FBF8001DCF68 /* ActorDetailVC.swift */,
 				CA6190111F0442C700805A59 /* AppDelegate.swift */,
 			);
 			name = Controller;
@@ -557,6 +560,7 @@
 				CAE9180F1F1040D5005A8071 /* UIButtonX.swift in Sources */,
 				CAF054FD1F165E52000BB584 /* UnderlineSegmentedControl.swift in Sources */,
 				CA5508F91F103C6C004AEAB0 /* FloatingActionButton.swift in Sources */,
+				CAF44FC71F27FBF8001DCF68 /* ActorDetailVC.swift in Sources */,
 				CA6190121F0442C700805A59 /* AppDelegate.swift in Sources */,
 				CAF926E91F185C87008EC410 /* Cast.swift in Sources */,
 				CAE918111F10466C005A8071 /* UIViewX.swift in Sources */,

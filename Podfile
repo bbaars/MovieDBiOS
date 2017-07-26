@@ -6,7 +6,7 @@ target 'MovieDB' do
   use_frameworks!
 
   # Pods for MovieDB
-	pod 'FBSDKLoginKit'
+    pod 'FBSDKLoginKit'
 	pod 'Alamofire', '~>4.0'
 	pod 'Fabric'
 	pod 'TwitterKit'

@@ -679,6 +679,7 @@
                         <outlet property="tableView" destination="eHY-dz-mQG" id="kgT-x7-AJB"/>
                         <outlet property="taglineLabel" destination="BNY-vF-l3b" id="clj-z4-T7D"/>
                         <outlet property="webView" destination="HAI-GR-2fZ" id="Ojo-IL-rjU"/>
+                        <segue destination="A3f-jr-fee" kind="custom" identifier="toActorDetailVC" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="15n-6e-rgg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5UQ-Gk-UyO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -686,11 +687,62 @@
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="138.58695652173915"/>
         </scene>
+        <!--Actor DetailVC-->
+        <scene sceneID="8zs-VH-EjL">
+            <objects>
+                <viewController id="A3f-jr-fee" customClass="ActorDetailVC" customModule="MovieDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UhR-bh-2G3"/>
+                        <viewControllerLayoutGuide type="bottom" id="8er-aE-P8l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kha-pd-5E9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Line" translatesAutoresizingMaskIntoConstraints="NO" id="i4R-DJ-pra">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="349"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mo0-od-Xl6">
+                                <rect key="frame" x="8" y="16" width="33" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="EZB-aG-zbw"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="cEk-Vh-lrR"/>
+                                    <constraint firstAttribute="width" constant="33" id="em7-Gp-8aN"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="33" id="yQx-3o-fHN"/>
+                                </constraints>
+                                <color key="tintColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="Arrow"/>
+                                <connections>
+                                    <segue destination="pmi-Cx-9Vf" kind="unwind" identifier="backSegue" customClass="SegueFromLeft" customModule="MovieDB" customModuleProvider="target" unwindAction="unwindWithSegue:" id="FP9-We-hfA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hugh Jackman" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOG-81-H7Y">
+                                <rect key="frame" x="33" y="80" width="327" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mo0-od-Xl6" firstAttribute="leading" secondItem="Kha-pd-5E9" secondAttribute="leading" constant="8" id="XUv-j0-Xrm"/>
+                            <constraint firstItem="mo0-od-Xl6" firstAttribute="top" secondItem="UhR-bh-2G3" secondAttribute="bottom" constant="16" id="gHo-hH-rBj"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rEx-V5-OpB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pmi-Cx-9Vf" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1905.7971014492755" y="138.58695652173915"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1star" width="113" height="31"/>
         <image name="Actor" width="41" height="40"/>
         <image name="Arrow" width="41" height="40"/>
+        <image name="Line" width="414" height="334"/>
         <image name="MenuCurve" width="126" height="736"/>
         <image name="Movie" width="41" height="40"/>
         <image name="MovieDBLogo" width="252" height="223"/>

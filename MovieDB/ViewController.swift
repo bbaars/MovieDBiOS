@@ -86,7 +86,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadDetails() {
         
         let movie = MovieDBManager()
-        let actor = ActorDBManager()
         
         /* once we download the movie details we can update our UI and reload our Table Data */
         movie.downloadMovieDBDetails(parameter: SearchTypes.popular) {
@@ -102,12 +101,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             /* adds a corner radius and drop shadow to our image */
             //self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
         }
-        
-        actor.downloadActorDetails(actorID: "500") { 
-            
-            print("Completed Actor Download")
-        }
-        
     }
     
     

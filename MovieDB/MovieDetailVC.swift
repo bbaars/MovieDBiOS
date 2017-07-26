@@ -28,6 +28,7 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var isInfo = true
     var isCast = false
     var isReview = false
+    var actors: [Actor] = [Actor]()
     
     /*
      * Override our view to update the UI, add the gesture recogizer and change our segmented control
@@ -38,13 +39,26 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         addGestureRecognizer()
         segmentedControl.addUnderline()
         setupUI()
-        
+    
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
-
     }
+    
+
+    //MARK: SEGUE
+    override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        let segue = SegueFromLeft(identifier: unwindSegue.identifier, source: unwindSegue.source, destination: unwindSegue.destination)
+        segue.perform()
+    }
+    
+    /* needed for our unwind story board segue */
+    @IBAction func unwind(segue: UIStoryboardSegue) {
+        
+    }
+    //MARK: END OF SEGUE
+    
     
     func setupUI() {
         
@@ -118,11 +132,20 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         if index > 0 && swipe.direction == .right {
             index -= 1
+            
+            if index <= 0 {
+                index = 0
+            }
+            
             segmentedControl.selectedSegmentIndex = index
         }
         
         if index < 2 && swipe.direction == .left {
             index += 1
+            
+            if index >= 2 {
+                index = 2
+            }
             segmentedControl.selectedSegmentIndex = index
         }
         
@@ -171,6 +194,8 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         segmentedControl.changeUnderlinePosition()
         tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
+        
+       // print(segmentedControl.selectedSegmentIndex)
     }
     
     
@@ -210,7 +235,12 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         if segmentedControl.selectedSegmentIndex == 1 {
-            return movie.cast.count
+            
+            if movie.cast.count <= 40 {
+                return movie.cast.count
+            } else {
+                return 40
+            }
         }
         
         if segmentedControl.selectedSegmentIndex == 2 {
@@ -253,8 +283,27 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-            print(movie.cast[indexPath.row].name)
+        //let chosenActor = actors[indexPath.row]
+        
+        let actor = ActorDBManager()
+        
+        actor.downloadActorDetails(actorID: "\(movie.cast[indexPath.row].id)") {
+            
+            if self.isCast {
+                self.performSegue(withIdentifier: "toActorDetailVC", sender: actor.getActor())
+            }
+        }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let destination = segue.destination as? ActorDetailVC {
+            if let actor = sender as? Actor {
+                destination.actor = actor
+            }
+        }
+    }
+    
 }
 
 

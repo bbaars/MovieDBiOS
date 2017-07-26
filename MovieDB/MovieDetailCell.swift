@@ -20,6 +20,9 @@ class MovieDetailCell: UITableViewCell {
     
     func configureInfoCell(movie: Movie) {
         
+        /* no highlighting when the cell has been tapped */
+        self.selectionStyle = .none
+        
         actorImage.isHidden = true
         actorName.isHidden = true
         characterLabel.isHidden = true
@@ -37,6 +40,8 @@ class MovieDetailCell: UITableViewCell {
         
         super.prepareForReuse()
         
+
+        
         actorImage.image = nil
         actorName.text = ""
         infoLabel.text = ""
@@ -44,6 +49,9 @@ class MovieDetailCell: UITableViewCell {
     }
     
     func configureActorCell(actor: Cast) {
+        
+        /* no highlighting when the cell has been tapped */
+        self.selectionStyle = .none
         
         actorImage.isHidden = false
         actorName.isHidden = false
@@ -63,6 +71,9 @@ class MovieDetailCell: UITableViewCell {
     
     func configureNonInfoCell(review: Review) {
         
+        /* no highlighting when the cell has been tapped */
+        self.selectionStyle = .none
+        
         actorImage.isHidden = true
         actorName.isHidden = true
         infoLabel.isHidden = false
@@ -72,6 +83,10 @@ class MovieDetailCell: UITableViewCell {
     }
     
     func configureEmptyInfoCell() {
+        
+        /* no highlighting when the cell has been tapped */
+        self.selectionStyle = .none
+        
         actorImage.isHidden = true
         actorName.isHidden = true
         infoLabel.isHidden = false
