@@ -74,6 +74,8 @@ struct reviewKeys {
 
 struct SearchTypes {
     static let popular = "/movie/popular"
+    static let topRated = "/movie/top_rated"
+    static let actorPopular = "/person/popular"
 }
 
 /* typealia for when an asynchronous function completes */

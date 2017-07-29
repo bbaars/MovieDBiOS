@@ -51,7 +51,6 @@ class AccountDBManager {
                 if let results = dict["results"] as? [[String:Any]] {
                     
                     for movie in results {
-                        
                         self.watchList.append(Movie(dict: movie))
                     }
                 }

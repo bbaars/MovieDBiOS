@@ -218,18 +218,27 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="Actor"/>
+                                        <connections>
+                                            <action selector="topRatedActorsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y0V-zi-3iu"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkI-eB-YiP">
                                         <rect key="frame" x="42" y="149" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="Star"/>
+                                        <connections>
+                                            <action selector="topRatedButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ngb-56-Hat"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJz-Fi-JE2">
                                         <rect key="frame" x="77" y="76" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="Movie"/>
+                                        <connections>
+                                            <action selector="popularMovieButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KfP-nM-eb0"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -401,6 +410,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="accountButton" destination="cNI-PT-pBG" id="yQ7-Rt-dFW"/>
+                        <outlet property="filterLabel" destination="qOq-Vq-8q2" id="FH9-3n-7rD"/>
                         <outlet property="homeButton" destination="NGP-ow-N50" id="UL1-NL-wME"/>
                         <outlet property="image" destination="hVU-rm-ntJ" id="dNI-Vf-eoM"/>
                         <outlet property="menuCurveImageView" destination="noq-rH-fhY" id="Fjf-i4-0F8"/>
@@ -414,6 +424,7 @@
                         <outlet property="tableView" destination="0Dp-bH-Ztr" id="FQf-Bb-VAr"/>
                         <outlet property="twitterButton" destination="HPg-ia-pHb" id="fkz-XH-M0G"/>
                         <segue destination="Cj5-qG-6DJ" kind="custom" identifier="toMovieDetailVC" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="iYQ-YS-zux"/>
+                        <segue destination="A3f-jr-fee" kind="custom" identifier="toActorDetailVC" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="oSd-9t-R8Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1183,6 +1194,7 @@
         <image name="settings" width="41" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xfq-FT-ipL"/>
+        <segue reference="iYQ-YS-zux"/>
+        <segue reference="oSd-9t-R8Z"/>
     </inferredMetricsTieBreakers>
 </document>

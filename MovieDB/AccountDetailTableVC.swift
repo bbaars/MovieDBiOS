@@ -110,6 +110,10 @@ class AccountDetailTableVC: UITableViewController {
         headerView.frame = getHeaderFrame
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     @IBAction func segmentedControlDidChange(_ sender: Any) {
         segmentControl.changeUnderlinePosition()
         

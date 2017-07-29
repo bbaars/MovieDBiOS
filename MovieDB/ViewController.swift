@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var twitterButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var filterLabel: UILabel!
     
     
     /* Our poster image */
@@ -32,8 +33,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     /* Array of Extra Movie Details */
     var movieDetails: [Movie] = [Movie]()
+    var topRatedMovies: [Movie] = [Movie]()
+    var topActors: [Actor] = [Actor]()
     var favMovies: [Movie] = [Movie]()
     var watchList: [Movie] = [Movie]()
+    
+    // filtering buttons are pushed
+    var isPopular = true
+    var isTopRated = false
+    var isActor = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,8 +84,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     /* If the user taps on the Top Movie */
     @IBAction func moreButtonTapped(_ sender: Any) {
-        let movie = movieDetails[0]
-        performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+        
+        if isPopular {
+            let movie = movieDetails[0]
+            performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+        } else if isTopRated {
+            let movie = topRatedMovies[0]
+            performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+        } else {
+            let actor = topActors[0]
+            
+            let actorDB = ActorDBManager()
+            
+            actorDB.downloadActorDetails(actorID: "\(actor.id)") {
+                self.performSegue(withIdentifier: "toActorDetailVC", sender: actorDB.getActor())
+                
+            }
+        }
     }
     
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
@@ -100,17 +123,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.popularDescription.text = self.movieDetails[0].overview
                 self.tableView.reloadData()
             }
-
+            
             /* adds a corner radius and drop shadow to our image */
             //self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
         }
-                
+        
         account.downloadWatchList {
             self.watchList = account.getWatchList()
+            self.watchList.reverse()
         }
         
         account.downloadFavoriteMovies {
             self.favMovies = account.getFavoriteMovies()
+             self.favMovies.reverse()
         }
     }
     
@@ -127,21 +152,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     /* finds how many rows in section we need based on our sizes */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieDetails.count - 1
+        if isPopular {
+            return movieDetails.count - 1
+        } else if isTopRated {
+            return topRatedMovies.count - 1
+        } else {
+            return topActors.count - 1
+        }
     }
     
     
     /* Configures the table to display popular  movies, top rated movies, and actors */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row + 1 < movieDetails.count {
-            let movie = movieDetails[indexPath.row + 1]
-            
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as? MovieCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+       
+        
+        if isPopular {
+            if indexPath.row + 1 < movieDetails.count {
+                let movie = movieDetails[indexPath.row + 1]
                 cell.configureCell(movie: movie)
                 return cell
             }
+        } else if isTopRated {
+            if indexPath.row + 1 < movieDetails.count {
+                let movie = topRatedMovies[indexPath.row + 1]
+                cell.configureCell(movie: movie)
+                return cell
+            }
+        } else if isActor {
+            if indexPath.row + 1 < movieDetails.count {
+                let actor = topActors[indexPath.row + 1]
+                cell.configureCell(actor: actor)
+                return cell
+            }
         }
+        
         return MovieCell()
     }
     
@@ -152,10 +198,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         and prepare to segue */
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row + 1 < movieDetails.count {
-            let movie = movieDetails[indexPath.row + 1]
-            
-            performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+        if isPopular {
+            if indexPath.row + 1 < movieDetails.count {
+                let movie = movieDetails[indexPath.row + 1]
+                performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+            }
+        } else if isTopRated {
+            if indexPath.row + 1 < topRatedMovies.count {
+                let movie = topRatedMovies[indexPath.row + 1]
+                performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
+            }
+        } else if isActor {
+            if indexPath.row + 1 < topActors.count {
+                let actor = topActors[indexPath.row + 1]
+                
+                let actorDB = ActorDBManager()
+                
+                actorDB.downloadActorDetails(actorID: "\(actor.id)") {
+                self.performSegue(withIdentifier: "toActorDetailVC", sender: actorDB.getActor())
+
+                }
+            }
         }
     }
     
@@ -173,6 +236,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let destination = segue.destination as? MovieDetailVC {
                 if let movie = sender as? Movie {
                     destination.movie = movie
+                }
+            }
+        } else if segue.identifier == "toActorDetailVC" {
+            if let destination = segue.destination as? ActorDetailVC {
+                if let actor = sender as? Actor {
+                    destination.actor = actor
                 }
             }
         }
@@ -211,6 +280,68 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func accountButtonTapped(_ sender: Any) {
          performSegue(withIdentifier: "toAccountVC", sender: favMovies)
+    }
+    
+    @IBAction func topRatedButtonTapped(_ sender: Any) {
+        
+        let movie = MovieDBManager()
+        
+        isPopular = false
+        isTopRated = true
+        isActor = false
+        filterLabel.text = "Top Rated Movies"
+        
+        movie.downloadMovieDBDetails(parameter: SearchTypes.topRated) {
+            print("Completed top rated Movies")
+            self.topRatedMovies = movie.getMovieDetails()
+            
+            if let url = URL(string: "\(imageUrlPrefix)w500/\(self.topRatedMovies[0].posterPath)") {
+                self.image.af_setImage(withURL: url)
+                self.popularTitle.text = self.topRatedMovies[0].title
+                self.popularDescription.text = self.topRatedMovies[0].overview
+                self.tableView.reloadData()
+            }
+        }
+        
+
+    }
+
+    @IBAction func popularMovieButtonTapped(_ sender: Any) {
+        isPopular = true
+        isTopRated = false
+        isActor = false
+        
+        filterLabel.text = "Popular Movies"
+    
+        if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movieDetails[0].posterPath)") {
+            self.image.af_setImage(withURL: url)
+            self.popularTitle.text = self.movieDetails[0].title
+            self.popularDescription.text = self.movieDetails[0].overview
+            self.tableView.reloadData()
+        }
+    }
+    
+    @IBAction func topRatedActorsButtonTapped(_ sender: Any) {
+        isPopular = false
+        isTopRated = false
+        isActor = true
+        
+        filterLabel.text = "Top Rated Actors"
+        
+        let actor = ActorDBManager()
+        
+        actor.downloadActorDetails(actorID: "popular") {
+            
+            self.topActors = actor.getActors()
+            
+            if let url = URL(string: "\(imageUrlPrefix)w500/\(self.topActors[0].profilePath)") {
+                self.image.af_setImage(withURL: url)
+                self.popularTitle.text = self.topActors[0].name
+                self.popularDescription.text = self.topActors[0].biography
+                self.tableView.reloadData()
+            }
+        }
+
     }
     
     func showMenu() {
