@@ -39,9 +39,7 @@ class MovieDetailCell: UITableViewCell {
     override func prepareForReuse() {
         
         super.prepareForReuse()
-        
-
-        
+    
         actorImage.image = nil
         actorName.text = ""
         infoLabel.text = ""

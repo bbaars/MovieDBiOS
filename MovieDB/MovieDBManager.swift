@@ -32,9 +32,14 @@ class MovieDBManager {
     var detailedTopMovies = [Movie]()
     var moviePoster = [String:URL]()
     var count = 0
+    var singleMovieDetail: Movie!
 
     func getMovieDetails() -> [Movie] {
         return detailedTopMovies
+    }
+    
+    func getMovie() -> Movie {
+        return singleMovieDetail
     }
     
     
@@ -79,14 +84,14 @@ class MovieDBManager {
 
     
     /* obtain even more information about the movies based on their ID */
-    private func downloadMoreMovieDetails(url: String, completed: @escaping DownloadComplete) {
+    public func downloadMoreMovieDetails(url: String, completed: @escaping DownloadComplete) {
         
         
         Alamofire.request("\(url)\(APIKey)&append_to_response=videos,reviews,credits").responseJSON { response in
             
             /* Obtains the dictionary representation of the JSON */
             if let movie = response.result.value as? [String:Any] {
-                
+
                 /* temporary dictory for us to later add to our array of movies */
                 var tempDict = [String:Any]()
                 
@@ -195,8 +200,10 @@ class MovieDBManager {
                 
                 if let videos = movie["videos"] as? [String:Any] {
                     if let results = videos["results"] as? [[String:Any]] {
-                        if let key = results[0]["key"] as? String {
-                            tempDict[movieKeys.MovieTrailer] = key
+                        if results.count > 0 {
+                            if let key = results[0]["key"] as? String {
+                                tempDict[movieKeys.MovieTrailer] = key
+                            }
                         }
                     }
                 }
@@ -270,7 +277,7 @@ class MovieDBManager {
                     }
                 }
                 
-                
+                self.singleMovieDetail = Movie(dict: tempDict)
                 self.detailedTopMovies.append(Movie(dict: tempDict))
                 tempDict.removeAll()
             }

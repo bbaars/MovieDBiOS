@@ -13,6 +13,8 @@
 		CA0650741F1A8F1700AD4CE3 /* MovieDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0650731F1A8F1700AD4CE3 /* MovieDetailCell.swift */; };
 		CA1D249E1F0D9E0D00E69F96 /* MovieDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1D249D1F0D9E0D00E69F96 /* MovieDBManager.swift */; };
 		CA1D24A11F0D9F3D00E69F96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1D24A01F0D9F3D00E69F96 /* Constants.swift */; };
+		CA3CD8F81F2AAFFD0087D824 /* MovieDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3CD8F71F2AAFFD0087D824 /* MovieDetailHeaderView.swift */; };
+		CA3CD8FC1F2ACABD0087D824 /* TempCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3CD8FB1F2ACABD0087D824 /* TempCell.swift */; };
 		CA5508F91F103C6C004AEAB0 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5508F81F103C6C004AEAB0 /* FloatingActionButton.swift */; };
 		CA6190121F0442C700805A59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6190111F0442C700805A59 /* AppDelegate.swift */; };
 		CA6190141F0442C700805A59 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6190131F0442C700805A59 /* ViewController.swift */; };
@@ -21,6 +23,9 @@
 		CA61901C1F0442C700805A59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA61901A1F0442C700805A59 /* LaunchScreen.storyboard */; };
 		CA6190271F0442C700805A59 /* MovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6190261F0442C700805A59 /* MovieDBTests.swift */; };
 		CA6190321F0442C700805A59 /* MovieDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6190311F0442C700805A59 /* MovieDBUITests.swift */; };
+		CA66874A1F2BF93E00F262C1 /* AccountDetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6687491F2BF93E00F262C1 /* AccountDetailTableVC.swift */; };
+		CA66874C1F2C1B5800F262C1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66874B1F2C1B5800F262C1 /* User.swift */; };
+		CA66874E1F2C1E0400F262C1 /* AccountDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66874D1F2C1E0400F262C1 /* AccountDBManager.swift */; };
 		CAC3C2A41F146B8400584C8C /* SlideFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC3C2A31F146B8400584C8C /* SlideFromRight.swift */; };
 		CAE9180F1F1040D5005A8071 /* UIButtonX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE9180E1F1040D5005A8071 /* UIButtonX.swift */; };
 		CAE918111F10466C005A8071 /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE918101F10466C005A8071 /* UIViewX.swift */; };
@@ -67,6 +72,8 @@
 		CA0650731F1A8F1700AD4CE3 /* MovieDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailCell.swift; sourceTree = "<group>"; };
 		CA1D249D1F0D9E0D00E69F96 /* MovieDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDBManager.swift; sourceTree = "<group>"; };
 		CA1D24A01F0D9F3D00E69F96 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CA3CD8F71F2AAFFD0087D824 /* MovieDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailHeaderView.swift; sourceTree = "<group>"; };
+		CA3CD8FB1F2ACABD0087D824 /* TempCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempCell.swift; sourceTree = "<group>"; };
 		CA5508F81F103C6C004AEAB0 /* FloatingActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		CA61900E1F0442C700805A59 /* MovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6190111F0442C700805A59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +88,9 @@
 		CA61902D1F0442C700805A59 /* MovieDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6190311F0442C700805A59 /* MovieDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBUITests.swift; sourceTree = "<group>"; };
 		CA6190331F0442C700805A59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA6687491F2BF93E00F262C1 /* AccountDetailTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailTableVC.swift; sourceTree = "<group>"; };
+		CA66874B1F2C1B5800F262C1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CA66874D1F2C1E0400F262C1 /* AccountDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDBManager.swift; sourceTree = "<group>"; };
 		CAC3C2A31F146B8400584C8C /* SlideFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideFromRight.swift; sourceTree = "<group>"; };
 		CAE9180E1F1040D5005A8071 /* UIButtonX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonX.swift; sourceTree = "<group>"; };
 		CAE918101F10466C005A8071 /* UIViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
@@ -160,6 +170,7 @@
 				CAF66B331F1427AA00A37B26 /* Actor.swift */,
 				CAF926E61F184CE7008EC410 /* Review.swift */,
 				CAF926E81F185C87008EC410 /* Cast.swift */,
+				CA66874B1F2C1B5800F262C1 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -169,6 +180,7 @@
 			children = (
 				CA1D249D1F0D9E0D00E69F96 /* MovieDBManager.swift */,
 				CAF055001F169210000BB584 /* ActorDBManager.swift */,
+				CA66874D1F2C1E0400F262C1 /* AccountDBManager.swift */,
 				CA1D24A01F0D9F3D00E69F96 /* Constants.swift */,
 				CAE918121F1052B2005A8071 /* Credit.swift */,
 				CAC3C2A31F146B8400584C8C /* SlideFromRight.swift */,
@@ -239,6 +251,8 @@
 				CA0650731F1A8F1700AD4CE3 /* MovieDetailCell.swift */,
 				CAFB15571F114D5400332131 /* RoundImageWithShadow.swift */,
 				CAF054FC1F165E52000BB584 /* UnderlineSegmentedControl.swift */,
+				CA3CD8F71F2AAFFD0087D824 /* MovieDetailHeaderView.swift */,
+				CA3CD8FB1F2ACABD0087D824 /* TempCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -249,6 +263,7 @@
 				CA6190131F0442C700805A59 /* ViewController.swift */,
 				CAF054FA1F15872C000BB584 /* MovieDetailVC.swift */,
 				CAF44FC61F27FBF8001DCF68 /* ActorDetailVC.swift */,
+				CA6687491F2BF93E00F262C1 /* AccountDetailTableVC.swift */,
 				CA6190111F0442C700805A59 /* AppDelegate.swift */,
 			);
 			name = Controller;
@@ -554,6 +569,8 @@
 				CAF055011F169210000BB584 /* ActorDBManager.swift in Sources */,
 				CA6190141F0442C700805A59 /* ViewController.swift in Sources */,
 				CAFB15551F111F6000332131 /* Movie.swift in Sources */,
+				CA66874C1F2C1B5800F262C1 /* User.swift in Sources */,
+				CA3CD8F81F2AAFFD0087D824 /* MovieDetailHeaderView.swift in Sources */,
 				CAF66B341F1427AA00A37B26 /* Actor.swift in Sources */,
 				CAF66B2E1F13EE0B00A37B26 /* MovieCell.swift in Sources */,
 				CAE918131F1052B2005A8071 /* Credit.swift in Sources */,
@@ -569,7 +586,10 @@
 				CAF66B301F14089600A37B26 /* UIImageViewX.swift in Sources */,
 				CAFB15581F114D5400332131 /* RoundImageWithShadow.swift in Sources */,
 				CA1D24A11F0D9F3D00E69F96 /* Constants.swift in Sources */,
+				CA66874E1F2C1E0400F262C1 /* AccountDBManager.swift in Sources */,
+				CA3CD8FC1F2ACABD0087D824 /* TempCell.swift in Sources */,
 				CAC3C2A41F146B8400584C8C /* SlideFromRight.swift in Sources */,
+				CA66874A1F2BF93E00F262C1 /* AccountDetailTableVC.swift in Sources */,
 				CA0650741F1A8F1700AD4CE3 /* MovieDetailCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -32,6 +32,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     /* Array of Extra Movie Details */
     var movieDetails: [Movie] = [Movie]()
+    var favMovies: [Movie] = [Movie]()
+    var watchList: [Movie] = [Movie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadDetails() {
         
         let movie = MovieDBManager()
+        let account = AccountDBManager()
         
         /* once we download the movie details we can update our UI and reload our Table Data */
         movie.downloadMovieDBDetails(parameter: SearchTypes.popular) {
@@ -100,6 +103,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             /* adds a corner radius and drop shadow to our image */
             //self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
+        }
+                
+        account.downloadWatchList {
+            self.watchList = account.getWatchList()
+        }
+        
+        account.downloadFavoriteMovies {
+            self.favMovies = account.getFavoriteMovies()
         }
     }
     
@@ -134,10 +145,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return MovieCell()
     }
     
+    //MARK: - NAVIGATION
+    
     
     /* Used to see which row the user clicks on. When they click on it, we obtain that movie info 
         and prepare to segue */
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if indexPath.row + 1 < movieDetails.count {
             let movie = movieDetails[indexPath.row + 1]
             
@@ -147,9 +161,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     /* When we click on a table row, we will send that information to our Detail VC */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? MovieDetailVC {
-            if let movie = sender as? Movie {
-                destination.movie = movie
+        
+        if segue.identifier == "toAccountVC" {
+            if let destination = segue.destination as? AccountDetailTableVC {
+                if let favMovies = sender as? [Movie] {
+                    destination.favoriteMovies = favMovies
+                    destination.watchList = watchList
+                }
+            }
+        } else if segue.identifier == "toMovieDetailVC" {
+            if let destination = segue.destination as? MovieDetailVC {
+                if let movie = sender as? Movie {
+                    destination.movie = movie
+                }
             }
         }
     }
@@ -182,6 +206,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func screenCoverButtonTapped(_ sender: Any) {
         hideMenu();
+    }
+    
+    
+    @IBAction func accountButtonTapped(_ sender: Any) {
+         performSegue(withIdentifier: "toAccountVC", sender: favMovies)
     }
     
     func showMenu() {

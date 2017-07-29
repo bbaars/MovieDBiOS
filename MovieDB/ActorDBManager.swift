@@ -27,7 +27,7 @@ class ActorDBManager {
     func downloadActorDetails(actorID: String, completed: @escaping DownloadComplete) {
         
         /* alamo fire request */
-        Alamofire.request("\(APIUrlPrefix)/person/\(actorID)?api_key=\(APIKey)&Append_to_response=movie_credits")
+        Alamofire.request("\(APIUrlPrefix)/person/\(actorID)?api_key=\(APIKey)&append_to_response=movie_credits")
             
             .downloadProgress { progress in
                 
@@ -48,6 +48,10 @@ class ActorDBManager {
                         tempDict[actorKeys.Deathday] = deathday;
                     }
                     
+                    if let birthday = dict[actorKeys.Birthday] as? String {
+                        tempDict[actorKeys.Birthday] = birthday
+                    }
+                    
                     if let id = dict[actorKeys.ID] as? Int {
                         tempDict[actorKeys.ID] = id
                     }
@@ -55,6 +59,7 @@ class ActorDBManager {
                     if let name = dict[actorKeys.Name] as? String {
                         tempDict[actorKeys.Name] = name
                     }
+                
                     
                     if let movieCredits = dict["movie_credits"] as? [String:Any] {
                         
@@ -65,7 +70,8 @@ class ActorDBManager {
                             for movie in castMovies {
                                 tempMovies.append(Movie(dict: movie))
                             }
-
+                            
+                            tempDict[actorKeys.Movies] = tempMovies
                         }
                     }
                     

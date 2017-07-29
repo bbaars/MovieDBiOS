@@ -13,6 +13,7 @@ let APIKey = "6615c9824f812a6fb9b8b4ea5f49a285"
 let APIUrlPrefix = "https://api.themoviedb.org/3"
 let imageUrlPrefix = "https://image.tmdb.org/t/p/"
 let youtubeVideoUrl = "https://www.youtube.com/watch?v="
+let sessionString = "720e0b015cfd60b7ad5ab0f12f448f7b9acd35e6"
 
 public enum DisplayType : Int {
     case poster

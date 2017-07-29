@@ -131,21 +131,12 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         var index = segmentedControl.selectedSegmentIndex   
         
         if index > 0 && swipe.direction == .right {
-            index -= 1
-            
-            if index <= 0 {
-                index = 0
-            }
-            
+            index -= 1 
             segmentedControl.selectedSegmentIndex = index
         }
         
         if index < 2 && swipe.direction == .left {
             index += 1
-            
-            if index >= 2 {
-                index = 2
-            }
             segmentedControl.selectedSegmentIndex = index
         }
         
@@ -195,7 +186,7 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
         
-       // print(segmentedControl.selectedSegmentIndex)
+       print(tableView.rowHeight)
     }
     
     

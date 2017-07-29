@@ -13,13 +13,13 @@ class UnderlineSegmentedControl: UISegmentedControl {
     func removeBorder() {
         
         /* setting the background color to white for all states of our UI Segmented Controller */
-        let backgroundImage = UIImage.getColoredRectImageWith(color: UIColor.white.cgColor, andSize: self.bounds.size)
+        let backgroundImage = UIImage.getColoredRectImageWith(color: UIColor.clear.cgColor, andSize: self.bounds.size)
         self.setBackgroundImage(backgroundImage, for: .normal, barMetrics: .default)
         self.setBackgroundImage(backgroundImage, for: .selected, barMetrics: .default)
         self.setBackgroundImage(backgroundImage, for: .highlighted, barMetrics: .default)
         
         /* setting the Divider image to white as well, and changing the text color to Our green for selected and gray for normal */
-        let dividerImage = UIImage.getColoredRectImageWith(color: UIColor.white.cgColor, andSize: CGSize(width: 1.0, height: self.bounds.size.height))
+        let dividerImage = UIImage.getColoredRectImageWith(color: UIColor.clear.cgColor, andSize: CGSize(width: 1.0, height: self.bounds.size.height))
         self.setDividerImage(dividerImage, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
         self.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.gray], for: .normal)
         self.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor(red: 0/255, green: 211/255, blue: 115/255, alpha: 1.0)], for: .selected)

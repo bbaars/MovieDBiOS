@@ -15,9 +15,15 @@ class MovieCell: UITableViewCell  {
     @IBOutlet weak var movieImage: UIImageViewX!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieDescription: UILabel!
+    @IBOutlet weak var biographyLabel: UILabel!
     
     
     func configureCell(movie: Movie) {
+        
+        biographyLabel.isHidden = true
+        movieImage.isHidden = false
+        movieTitle.isHidden = false
+        movieDescription.isHidden = false
     
         /* no highlighting when the cell has been tapped */
         self.selectionStyle = .none
@@ -31,4 +37,29 @@ class MovieCell: UITableViewCell  {
         self.movieTitle.text = movie.title
         self.movieDescription.text = movie.overview
     }
+    
+    override func prepareForReuse() {
+        
+        super.prepareForReuse()
+        
+        movieImage.image = nil
+        movieTitle.text = ""
+        movieDescription.text = ""
+        biographyLabel.text = ""
+    }
+    
+    func configureCell(label: String) {
+        
+        /* no highlighting when the cell has been tapped */
+        self.selectionStyle = .none
+        
+        biographyLabel.isHidden = false
+        movieImage.isHidden = true
+        movieTitle.isHidden = true
+        movieDescription.isHidden = true
+        
+        self.biographyLabel.text = label
+        self.biographyLabel.numberOfLines = 0
+    }
+    
 }

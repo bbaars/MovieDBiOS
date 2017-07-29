@@ -70,7 +70,7 @@ class SegueFromLeft: UIStoryboardSegue {
             src?.frame = (src?.frame.offsetBy(dx: screenWidth, dy: 0))!
             dst?.frame = (dst?.frame.offsetBy(dx: screenWidth, dy: 0))!
         }) { (Bool) in
-            self.source.dismiss(animated: false, completion: nil)
+           self.source.dismiss(animated: false, completion: nil)
         }
         
     }
