@@ -23,6 +23,10 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var genreLabel2: UILabel!
     @IBOutlet weak var genreLabel3: UILabel!
     
+    @IBOutlet weak var menu: UIViewX!
+    
+    
+    
     var movie: Movie!
     var vote: Int = 0
     var isInfo = true
@@ -39,6 +43,8 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         addGestureRecognizer()
         segmentedControl.addUnderline()
         setupUI()
+        
+        closeMenu()
     
         tableView.delegate = self
         tableView.dataSource = self
@@ -293,6 +299,45 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 destination.actor = actor
             }
         }
+    }
+    
+    
+    @IBAction func menuButtonPressed(_ sender: Any) {
+        
+        UIView.animate(withDuration: 0.3) { 
+            
+            if self.menu.transform == .identity {
+                self.closeMenu()
+            } else {
+                self.menu.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+        }
+    }
+    
+    func closeMenu() {
+        menu.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+    }
+    
+    
+    @IBAction func favoritesButtonPressed(_ sender: Any) {
+        
+        let account = AccountDBManager()
+        
+        account.addMovieToFavorites(id: self.movie.id) { 
+             self.closeMenu()
+        }
+        
+    }
+
+    
+    @IBAction func watchListButtonPressed(_ sender: Any) {
+        
+        let account = AccountDBManager()
+        
+        account.addMovieToWatchList(id: self.movie.id) {
+            self.closeMenu()
+        }
+        
     }
     
 }

@@ -26,7 +26,7 @@ class AccountDBManager {
     
     func downloadFavoriteMovies(completed: @escaping DownloadComplete) {
         
-        Alamofire.request("https://api.themoviedb.org/3/account/%7Baccount_id%7D/favorite/movies?api_key=6615c9824f812a6fb9b8b4ea5f49a285&session_id=720e0b015cfd60b7ad5ab0f12f448f7b9acd35e6&language=en-US&sort_by=created_at.asc&page=1") .responseJSON { response in
+        Alamofire.request("\(APIUrlPrefix)/account/%7Baccount_id%7D/favorite/movies?api_key=6615c9824f812a6fb9b8b4ea5f49a285&session_id=720e0b015cfd60b7ad5ab0f12f448f7b9acd35e6&language=en-US&sort_by=created_at.desc&page=1") .responseJSON { response in
             
             if let dict = response.result.value as? [String:Any] {
                 
@@ -44,7 +44,7 @@ class AccountDBManager {
     
     func downloadWatchList(completed: @escaping DownloadComplete) {
         
-        Alamofire.request("https://api.themoviedb.org/3/account/%7Baccount_id%7D/watchlist/movies?api_key=6615c9824f812a6fb9b8b4ea5f49a285&language=en-US&session_id=720e0b015cfd60b7ad5ab0f12f448f7b9acd35e6&sort_by=created_at.asc&page=1") .responseJSON { response in
+        Alamofire.request("\(APIUrlPrefix)/account/%7Baccount_id%7D/watchlist/movies?api_key=6615c9824f812a6fb9b8b4ea5f49a285&language=en-US&session_id=720e0b015cfd60b7ad5ab0f12f448f7b9acd35e6&sort_by=created_at.desc&page=1") .responseJSON { response in
             
             if let dict = response.result.value as? [String:Any] {
                 
@@ -59,5 +59,39 @@ class AccountDBManager {
         }
     }
     
+    func addMovieToFavorites(id: Int, completed: @escaping DownloadComplete) {
+        
+        let json:[String:Any] = [
+            "media_type": "movie",
+            "media_id": id,
+            "favorite": true
+        ]
+        
+        Alamofire.request("\(APIUrlPrefix)/account/%7Baccount_id%7D/favorite?api_key=\(APIKey)&session_id=\(sessionString)", method: .post, parameters: json, encoding: JSONEncoding.default, headers: nil)
+            
+            .responseJSON { response in
+                
+                print(response.result.value ?? "Could not be completed" )
+                
+                completed()
+        }
+    }
     
+    func addMovieToWatchList(id: Int, completed: @escaping DownloadComplete) {
+        
+        let json:[String:Any] = [
+            "media_type": "movie",
+            "media_id": id,
+            "watchlist": true
+        ]
+        
+        Alamofire.request("\(APIUrlPrefix)/account/%7Baccount_id%7D/watchlist?api_key=\(APIKey)&session_id=\(sessionString)", method: .post, parameters: json, encoding: JSONEncoding.default, headers: nil)
+            
+            .responseJSON { response in
+                
+                print(response.result.value ?? "Could not be completed" )
+                
+                completed()
+        }
+    }
 }

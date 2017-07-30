@@ -47,11 +47,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         addGestureRecognizer()
-
+        loadDetails()
         tableView.dataSource = self
         tableView.delegate = self
         menuCurveImageView.image = #imageLiteral(resourceName: "MenuCurve")
-        loadDetails()
         let img = UIImage(named: "notAvailable")
         self.image.image = img
     }
@@ -60,6 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         hideMenu()
         closeMenu()
+        loadUserDetails()
     }
     
     func addGestureRecognizer() {
@@ -111,7 +111,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadDetails() {
         
         let movie = MovieDBManager()
-        let account = AccountDBManager()
+       
         
         /* once we download the movie details we can update our UI and reload our Table Data */
         movie.downloadMovieDBDetails(parameter: SearchTypes.popular) {
@@ -128,14 +128,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //self.image = self.addCornersAndDropShadow(image: self.image, imgRadius: 10.0, radius: 5.0, offset: 2.0)
         }
         
+
+    }
+    
+    func loadUserDetails() {
+        
+        let account = AccountDBManager()
+        
         account.downloadWatchList {
+            print("WATCHLIST DOWNLOADED")
             self.watchList = account.getWatchList()
-            self.watchList.reverse()
         }
         
         account.downloadFavoriteMovies {
+            print("FAVORITES DOWNLOADED")
             self.favMovies = account.getFavoriteMovies()
-             self.favMovies.reverse()
         }
     }
     
@@ -302,8 +309,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.tableView.reloadData()
             }
         }
-        
-
     }
 
     @IBAction func popularMovieButtonTapped(_ sender: Any) {
@@ -341,7 +346,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.tableView.reloadData()
             }
         }
-
     }
     
     func showMenu() {
