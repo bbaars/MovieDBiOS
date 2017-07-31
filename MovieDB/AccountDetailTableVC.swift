@@ -60,8 +60,8 @@ class AccountDetailTableVC: UITableViewController {
                 segmentControl.selectedSegmentIndex = 1
                 segmentControl.changeUnderlinePosition()
                 tableView.setContentOffset(CGPoint(x: 0, y: -StretchyHeader().headerHeight), animated: false)
-                tableView.reloadData()
                 isWatchList = false
+                tableView.reloadData()
 
             }
         } else if swipe.direction == .right {
@@ -99,12 +99,6 @@ class AccountDetailTableVC: UITableViewController {
         if tableView.contentOffset.y < -newHeight {
             getHeaderFrame.origin.y = tableView.contentOffset.y
             getHeaderFrame.size.height = -tableView.contentOffset.y
-          
-//            var getLabelFrame = CGRect(x: welcomeLabel.frame.origin.x, y: welcomeLabel.frame.origin.y, width: welcomeLabel.frame.width, height: welcomeLabel.frame.height)
-//            getLabelFrame.origin.y = tableView.contentOffset.y
-//            getLabelFrame.size.height = -tableView.contentOffset.y
-//            welcomeLabel.frame = getLabelFrame
-//            
         }
         
         headerView.frame = getHeaderFrame
@@ -200,5 +194,41 @@ extension AccountDetailTableVC {
                 self.performSegue(withIdentifier: "toMovieDetailVC", sender: movieDB.getMovie())
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let account = AccountDBManager()
+        
+        let removeAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: " Remove ") { (action, indexPath) in
+            self.isEditing = true
+            
+            if self.isWatchList {
+                
+                account.addMovieToWatchList(id: self.watchList[indexPath.row].id, isWatchlist: false, completed: {
+                    
+                    print("removed \(self.watchList[indexPath.row].title)")
+                    
+                    self.watchList.remove(at: indexPath.row)
+                    tableView.reloadData()
+                    
+                    
+                    
+                })
+                
+            } else {
+             
+                account.addMovieToFavorites(id: self.favoriteMovies[indexPath.row].id, isFavorite: false, completed: {
+                    
+                    self.favoriteMovies.remove(at: indexPath.row)
+                    tableView.reloadData()
+                })
+            }
+        }
+        
+        removeAction.backgroundColor = UIColor(red: 255/255, green: 128/255, blue: 128/255, alpha: 1.0)
+        
+        
+        return [removeAction]
     }
 }

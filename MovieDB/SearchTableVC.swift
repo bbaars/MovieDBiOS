@@ -150,6 +150,7 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        
         let addAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: " Add  ") { (action, indexPath) in
             self.isEditing = true
             print("Add Button Pressed")

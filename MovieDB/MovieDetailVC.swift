@@ -22,7 +22,6 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var genreLabel1: UILabel!
     @IBOutlet weak var genreLabel2: UILabel!
     @IBOutlet weak var genreLabel3: UILabel!
-    
     @IBOutlet weak var menu: UIViewX!
     
     
@@ -102,10 +101,17 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 count += 1
             }
         }
+        
+        if self.movie.releaseDate != "" {
+            let array = self.movie.releaseDate.components(separatedBy: "-")
+            self.movieTitle.text = "\(movie.title) (\(array[0]))"
+        } else {
+            self.movieTitle.text = self.movie.title
+        }
+        
         self.movieImage = self.addCornersAndDropShadow(image: self.movieImage, imgRadius: 10.0, radius: 5.0, offset: 2.0)
-        self.movieTitle.text = self.movie.title
         self.taglineLabel.text = self.movie.tagline
-        runTimeLabel.text = movie.runtimeToString()
+                runTimeLabel.text = movie.runtimeToString()
         webView.loadHTMLString("<div style=\"position:relative;height:0;padding-bottom:56.25%\"><iframe width=\"430\" height=\"208\" src=\"https://www.youtube.com/embed/\(movie.movieTrailer)?rel=0&showinfo=0&autohide=1\" frameborder=\"0\" allowfullscreen></iframe></div>", baseURL: nil)
         updateVoteImage()
     }
@@ -323,7 +329,7 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         let account = AccountDBManager()
         
-        account.addMovieToFavorites(id: self.movie.id) { 
+        account.addMovieToFavorites(id: self.movie.id, isFavorite: true) {
              self.closeMenu()
         }
         
@@ -334,7 +340,7 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         let account = AccountDBManager()
         
-        account.addMovieToWatchList(id: self.movie.id) {
+        account.addMovieToWatchList(id: self.movie.id, isWatchlist: true) {
             self.closeMenu()
         }
         

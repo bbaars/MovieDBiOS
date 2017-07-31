@@ -59,38 +59,34 @@ class AccountDBManager {
         }
     }
     
-    func addMovieToFavorites(id: Int, completed: @escaping DownloadComplete) {
+    func addMovieToFavorites(id: Int, isFavorite: Bool, completed: @escaping DownloadComplete) {
         
         let json:[String:Any] = [
             "media_type": "movie",
             "media_id": id,
-            "favorite": true
+            "favorite": isFavorite
         ]
         
         Alamofire.request("\(APIUrlPrefix)/account/%7Baccount_id%7D/favorite?api_key=\(APIKey)&session_id=\(sessionString)", method: .post, parameters: json, encoding: JSONEncoding.default, headers: nil)
             
             .responseJSON { response in
-                
-                print(response.result.value ?? "Could not be completed" )
-                
+            
                 completed()
         }
     }
     
-    func addMovieToWatchList(id: Int, completed: @escaping DownloadComplete) {
+    func addMovieToWatchList(id: Int, isWatchlist: Bool, completed: @escaping DownloadComplete) {
         
         let json:[String:Any] = [
             "media_type": "movie",
             "media_id": id,
-            "watchlist": true
+            "watchlist": isWatchlist
         ]
         
         Alamofire.request("\(APIUrlPrefix)/account/%7Baccount_id%7D/watchlist?api_key=\(APIKey)&session_id=\(sessionString)", method: .post, parameters: json, encoding: JSONEncoding.default, headers: nil)
             
             .responseJSON { response in
-                
-                print(response.result.value ?? "Could not be completed" )
-                
+            
                 completed()
         }
     }

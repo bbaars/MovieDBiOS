@@ -712,25 +712,38 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1i-Ql-kjU">
+                                            <rect key="frame" x="371" y="28" width="35" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="35" id="q3b-2S-oxf"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                            <color key="textColor" white="0.40999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLL-nm-Ud0">
-                                            <rect key="frame" x="61" y="27" width="345" height="42"/>
+                                            <rect key="frame" x="60" y="26" width="303" height="35"/>
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="tLL-nm-Ud0" firstAttribute="leading" secondItem="7Pd-lC-OW4" secondAttribute="trailing" constant="8" id="1bm-uV-jz2"/>
-                                        <constraint firstItem="tLL-nm-Ud0" firstAttribute="trailing" secondItem="c3V-vR-Rl7" secondAttribute="trailingMargin" id="LbP-x4-0pY"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="tLL-nm-Ud0" secondAttribute="bottom" constant="29" id="Ii8-1S-RLa"/>
+                                        <constraint firstItem="tLL-nm-Ud0" firstAttribute="leading" secondItem="7Pd-lC-OW4" secondAttribute="trailing" constant="7" id="MUX-X2-r3h"/>
                                         <constraint firstItem="7Pd-lC-OW4" firstAttribute="top" secondItem="c3V-vR-Rl7" secondAttribute="topMargin" constant="5" id="P86-Yh-62c"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="tLL-nm-Ud0" secondAttribute="bottom" constant="20.670000000000002" id="cxr-po-mcz"/>
-                                        <constraint firstItem="tLL-nm-Ud0" firstAttribute="top" secondItem="c3V-vR-Rl7" secondAttribute="topMargin" constant="19" id="tCL-DV-q4y"/>
+                                        <constraint firstItem="tLL-nm-Ud0" firstAttribute="top" secondItem="c3V-vR-Rl7" secondAttribute="topMargin" constant="18" id="PpO-NM-pAg"/>
+                                        <constraint firstItem="M1i-Ql-kjU" firstAttribute="top" secondItem="c3V-vR-Rl7" secondAttribute="topMargin" constant="20" id="QYE-cC-Cll"/>
+                                        <constraint firstItem="M1i-Ql-kjU" firstAttribute="leading" secondItem="tLL-nm-Ud0" secondAttribute="trailing" constant="8" id="XFI-7u-t8q"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="M1i-Ql-kjU" secondAttribute="bottom" constant="31" id="fp0-sw-cxi"/>
+                                        <constraint firstItem="M1i-Ql-kjU" firstAttribute="trailing" secondItem="c3V-vR-Rl7" secondAttribute="trailingMargin" id="uZK-6X-hus"/>
                                         <constraint firstItem="7Pd-lC-OW4" firstAttribute="leading" secondItem="c3V-vR-Rl7" secondAttribute="leadingMargin" id="zym-ts-D4k"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="resultLabel" destination="tLL-nm-Ud0" id="Czr-aL-WTC"/>
                                     <outlet property="resultsImage" destination="7Pd-lC-OW4" id="9Ls-tF-iMz"/>
+                                    <outlet property="typeLabel" destination="M1i-Ql-kjU" id="CRf-31-HIR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -790,9 +803,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2h 49min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7o9-Hr-jSU">
-                                <rect key="frame" x="268" y="284" width="120" height="15"/>
+                                <rect key="frame" x="268" y="284" width="54" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="Dfl-VN-mPL"/>
                                     <constraint firstAttribute="height" constant="15" id="MT0-4F-xBA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
@@ -1358,7 +1370,7 @@
         <image name="watchlist" width="41" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iYQ-YS-zux"/>
-        <segue reference="oSd-9t-R8Z"/>
+        <segue reference="kU3-DI-Et9"/>
+        <segue reference="D5y-G1-NzB"/>
     </inferredMetricsTieBreakers>
 </document>

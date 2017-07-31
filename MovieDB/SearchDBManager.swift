@@ -57,7 +57,7 @@ class SearchDBManager {
             actors += id + ","
         }
         
-        Alamofire.request("\(APIUrlPrefix)/discover/movie?with_people=\(actors)&sort_by=popularity.desc&api_key=\(APIKey)")
+        Alamofire.request("\(APIUrlPrefix)/discover/movie?with_cast=\(actors)&sort_by=popularity.desc&api_key=\(APIKey)")
             
             .responseJSON { response in
                 
