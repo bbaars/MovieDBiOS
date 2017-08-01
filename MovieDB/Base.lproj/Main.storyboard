@@ -713,7 +713,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1i-Ql-kjU">
-                                            <rect key="frame" x="371" y="28" width="35" height="31"/>
+                                            <rect key="frame" x="371" y="28" width="35" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="35" id="q3b-2S-oxf"/>
                                             </constraints>
@@ -722,25 +722,36 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLL-nm-Ud0">
-                                            <rect key="frame" x="60" y="26" width="303" height="35"/>
+                                            <rect key="frame" x="60" y="26" width="303" height="29"/>
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93g-M5-pIB">
+                                            <rect key="frame" x="61" y="56" width="346" height="17"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                            <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="tLL-nm-Ud0" secondAttribute="bottom" constant="29" id="Ii8-1S-RLa"/>
+                                        <constraint firstItem="93g-M5-pIB" firstAttribute="leading" secondItem="7Pd-lC-OW4" secondAttribute="trailing" constant="8" id="AIm-nm-OTE"/>
+                                        <constraint firstAttribute="trailing" secondItem="93g-M5-pIB" secondAttribute="trailing" constant="7" id="Dzy-Ji-2hW"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="tLL-nm-Ud0" secondAttribute="bottom" constant="35" id="Ii8-1S-RLa"/>
                                         <constraint firstItem="tLL-nm-Ud0" firstAttribute="leading" secondItem="7Pd-lC-OW4" secondAttribute="trailing" constant="7" id="MUX-X2-r3h"/>
                                         <constraint firstItem="7Pd-lC-OW4" firstAttribute="top" secondItem="c3V-vR-Rl7" secondAttribute="topMargin" constant="5" id="P86-Yh-62c"/>
+                                        <constraint firstItem="93g-M5-pIB" firstAttribute="top" secondItem="tLL-nm-Ud0" secondAttribute="bottom" constant="1" id="PUq-DP-a7M"/>
                                         <constraint firstItem="tLL-nm-Ud0" firstAttribute="top" secondItem="c3V-vR-Rl7" secondAttribute="topMargin" constant="18" id="PpO-NM-pAg"/>
                                         <constraint firstItem="M1i-Ql-kjU" firstAttribute="top" secondItem="c3V-vR-Rl7" secondAttribute="topMargin" constant="20" id="QYE-cC-Cll"/>
                                         <constraint firstItem="M1i-Ql-kjU" firstAttribute="leading" secondItem="tLL-nm-Ud0" secondAttribute="trailing" constant="8" id="XFI-7u-t8q"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="M1i-Ql-kjU" secondAttribute="bottom" constant="31" id="fp0-sw-cxi"/>
+                                        <constraint firstAttribute="bottom" secondItem="93g-M5-pIB" secondAttribute="bottom" constant="25" id="YPL-4T-iOR"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="M1i-Ql-kjU" secondAttribute="bottom" constant="35" id="fp0-sw-cxi"/>
                                         <constraint firstItem="M1i-Ql-kjU" firstAttribute="trailing" secondItem="c3V-vR-Rl7" secondAttribute="trailingMargin" id="uZK-6X-hus"/>
                                         <constraint firstItem="7Pd-lC-OW4" firstAttribute="leading" secondItem="c3V-vR-Rl7" secondAttribute="leadingMargin" id="zym-ts-D4k"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="characterLabel" destination="93g-M5-pIB" id="GRg-ID-tpd"/>
                                     <outlet property="resultLabel" destination="tLL-nm-Ud0" id="Czr-aL-WTC"/>
                                     <outlet property="resultsImage" destination="7Pd-lC-OW4" id="9Ls-tF-iMz"/>
                                     <outlet property="typeLabel" destination="M1i-Ql-kjU" id="CRf-31-HIR"/>
@@ -1030,7 +1041,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08l-IU-24N" customClass="UIButtonX" customModule="MovieDB" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08l-IU-24N" customClass="FloatingActionButton" customModule="MovieDB" customModuleProvider="target">
                                 <rect key="frame" x="366" y="16" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1370,7 +1381,7 @@
         <image name="watchlist" width="41" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kU3-DI-Et9"/>
-        <segue reference="D5y-G1-NzB"/>
+        <segue reference="oSd-9t-R8Z"/>
+        <segue reference="iYQ-YS-zux"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -136,12 +136,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let account = AccountDBManager()
         
         account.downloadWatchList {
-            print("WATCHLIST DOWNLOADED")
             self.watchList = account.getWatchList()
         }
         
         account.downloadFavoriteMovies {
-            print("FAVORITES DOWNLOADED")
             self.favMovies = account.getFavoriteMovies()
         }
     }

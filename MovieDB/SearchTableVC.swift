@@ -9,6 +9,8 @@
 import UIKit
 
 class SearchTableVC: UITableViewController, UISearchBarDelegate {
+    
+    // MARK: IBOUTLETS AND VARIABLES
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultsLabel: UILabel!
@@ -20,8 +22,12 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
     var isMultiSearch: Bool = false
     var movieFilters = [String]()
     var actorFilters = [String]()
-    var filteredResults = [Any]()
     var numFilters = 0
+    var movieActors = [Cast]()
+    var isMovie = false
+    var isClear = false
+    
+    // MARK: END OF IBOUTLETS AND VARIABLES
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +48,7 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
         updateView()
     }
     
+    // MARK: STICKY HEADER
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNewView()
@@ -74,30 +81,52 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
         headerView.frame = getHeaderFrame
     }
     
+    // MARK: - END STICKY HEADER
+    
     @IBAction func searchMultiButtonClicked(_ sender: Any) {
         
-        let search = SearchDBManager()
-        view.endEditing(true)
         
-        if actorFilters.count > 1 {
-            search.searchForMultipleActors(query: actorFilters) {
-                self.results.removeAll()
-                self.results = search.getSearchResult()
-                self.tableView.reloadData()
-            }
+        if isClear {
+            
+            movieFilters.removeAll()
+            actorFilters.removeAll()
+            results.removeAll()
+            tableView.reloadData()
+            resultsLabel.text = ""
+            numFilters = 0
+            
+            searchMultiButton.setTitle("Search", for: .normal)
+            searchMultiButton.setTitleColor(UIColor.init(red: 0/255, green: 211/255, blue: 115/255, alpha: 1.0), for: .normal)
+            
+            isClear = false
+            
         } else {
-            resultsLabel.text = "Try filtering by only actors"
+
+            let search = SearchDBManager()
+            view.endEditing(true)
+          
+
+            
+            if actorFilters.count > 1 {
+                search.searchForMultipleActors(query: actorFilters) {
+                    self.results.removeAll()
+                    self.results = search.getSearchResult()
+                    self.tableView.reloadData()
+                }
+            }
+            
+            searchMultiButton.setTitle("Clear", for: .normal)
+            searchMultiButton.setTitleColor(UIColor.init(red: 255/255, green: 128/255, blue: 128/255, alpha: 1.0), for: .normal)
+            
+            isClear = true
         }
+        
+
     }
     
 
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -144,6 +173,14 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
                     self.performSegue(withIdentifier: "toActorDetailVC", sender: actorDB.getActor())
                 }
             }
+        } else if results[indexPath.row] is Cast {
+            
+            if let actor = results[indexPath.row] as? Cast {
+                actorDB.downloadActorDetails(actorID: "\(actor.id)") {
+                    
+                    self.performSegue(withIdentifier: "toActorDetailVC", sender: actorDB.getActor())
+                }
+            }
         }
     }
     
@@ -153,26 +190,35 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
         
         let addAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: " Add  ") { (action, indexPath) in
             self.isEditing = true
-            print("Add Button Pressed")
             
             self.numFilters += 1
             
             if self.numFilters >= 2 {
                 self.searchMultiButton.isHidden = false
             }
-           
+            
            let obj = self.results[indexPath.row]
             self.isMultiSearch = true
-        
             
             if obj is Movie {
+                
                 self.movieFilters.append("\((obj as! Movie).id)")
                 print("Movie ID: \((obj as! Movie).id)")
                 self.resultsLabel.text! += "\((obj as! Movie).title), "
+                
+                let account = MovieDBManager()
+                
+                account.downloadMoreMovieDetails(url: "\(APIUrlPrefix)/movie/\((obj as! Movie).id)?api_key=", completed: {
+                    self.isMovie = true
+                    self.movieActors = account.getMovie().cast
+                })
+                
             } else if obj is Actor {
                 self.actorFilters.append("\((obj as! Actor).id)")
                 self.resultsLabel.text! += "\((obj as! Actor).name), "
                 print("Actor ID: \((obj as! Actor).id)")
+                
+  
             }
             
             self.searchBar.text! = ""
@@ -204,7 +250,7 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    
+    // MARK: Searching
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
@@ -225,7 +271,7 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
             self.results.removeAll()
             self.tableView.reloadData()
             
-        } else {
+        } else if movieFilters == [] {
             
             let searchString = searchBar.text?.replacingOccurrences(of: " ", with: "%20")
             let search = SearchDBManager()
@@ -235,10 +281,19 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
                 self.tableView.reloadData()
                 
             }
+        } else if isMovie {
+            
+            let searchString = searchBar.text!.lowercased()
+            
+            results = movieActors.filter({$0.name.lowercased().range(of: searchString) != nil || $0.character.lowercased().range(of: searchString) != nil})
+            //results.append(movieActors.filter({$0.character.range(of: searchString) != nil}))
+            tableView.reloadData()
         }
     }
     
-    //MARK: SEGUE
+    // MARK: - END OF SEARCHING
+    
+    //MARK: - SEGUE
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
         let segue = SegueFromLeft(identifier: unwindSegue.identifier, source: unwindSegue.source, destination: unwindSegue.destination)
         segue.perform()
@@ -248,6 +303,6 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
     @IBAction func unwind(segue: UIStoryboardSegue) {
         
     }
-    //MARK: END OF SEGUE
+    //MARK: - END OF SEGUE
     
 }

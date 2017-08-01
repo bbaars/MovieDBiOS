@@ -35,10 +35,6 @@ class AccountDetailTableVC: UITableViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNewView()
-        
-        // Get the vertical offset of our tableview
-        //var offset = tableView.contentOffset.y
-        //var headerTransform = CATransform3DIdentity
     }
     
     func addGestureRecognizer() {

@@ -16,8 +16,11 @@ class SearchCell: UITableViewCell {
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var resultsImage: UIImageViewX!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var characterLabel: UILabel!
     
     func configureCell(object: Any) {
+        
+        characterLabel.isHidden = true
         
         if object is Movie {
             
@@ -51,6 +54,25 @@ class SearchCell: UITableViewCell {
 
             
             resultLabel.text = (object as! Actor).name
+            
+        } else if object is Cast {
+            
+             characterLabel.isHidden = false
+            
+            /* obtains the url and sets the movie image */
+            if let url = URL(string: "\(imageUrlPrefix)w500/\((object as! Cast).profilePath)") {
+                self.resultsImage.af_setImage(withURL: url)
+            }
+            
+            typeLabel.text = "A"
+            typeLabel.layer.borderWidth = 2.0
+            typeLabel.layer.cornerRadius = 5.0
+            typeLabel.clipsToBounds = true
+            typeLabel.layer.borderColor = UIColor.init(red: 255/255, green: 128/255, blue: 128/255, alpha: 0.7).cgColor
+            typeLabel.backgroundColor = UIColor.init(red: 255/255, green: 128/255, blue: 128/255, alpha: 0.7)
+            
+            characterLabel.text = "\((object as! Cast).character)"
+            resultLabel.text = (object as! Cast).name
         }
     }
     
