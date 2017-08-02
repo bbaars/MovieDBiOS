@@ -70,9 +70,12 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         genreLabel2.isHidden = true
         genreLabel3.isHidden = true
         
+        print(self.movie.posterPath)
+        
         if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movie.posterPath)") {
             self.movieImage.af_setImage(withURL: url)
         }
+        
         
         var count = 0
         for genre in self.movie.genre {

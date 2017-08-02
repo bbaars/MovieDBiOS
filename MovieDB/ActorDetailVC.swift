@@ -142,6 +142,7 @@ class ActorDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if isMovie {
             
             movieDB.downloadMoreMovieDetails(url: "\(APIUrlPrefix)/movie/\(actor.movies[indexPath.row].id)?api_key=") {
+                print(self.actor.movies[indexPath.row].title)
                 self.performSegue(withIdentifier: "toMovieDetail", sender: movieDB.getMovie())
             }
         } else if isTV {
@@ -154,7 +155,7 @@ class ActorDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toMovieDetailVC" {
+        if segue.identifier == "toMovieDetail" {
             if let destination = segue.destination as? MovieDetailVC {
                 if let movie = sender as? Movie {
                     destination.movie = movie
