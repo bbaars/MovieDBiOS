@@ -32,15 +32,13 @@ class ActorDBManager {
     func downloadActorDetails(actorID: String, completed: @escaping DownloadComplete) {
         
         /* alamo fire request */
-        Alamofire.request("\(APIUrlPrefix)/person/\(actorID)?api_key=\(APIKey)&append_to_response=movie_credits")
+        Alamofire.request("\(APIUrlPrefix)/person/\(actorID)?api_key=\(APIKey)&append_to_response=combined_credits")
             
             .downloadProgress { progress in
                 
 //                print("Download Progress: \(progress.fractionCompleted)")
             }
             .responseJSON { response in
-                
-                
                 
                 /* Obtains the dictionary representation of the JSON */
                 if let dict = response.result.value as? [String:Any] {
@@ -87,16 +85,26 @@ class ActorDBManager {
         }
         
         
-        if let movieCredits = dict["movie_credits"] as? [String:Any] {
+        if let movieCredits = dict["combined_credits"] as? [String:Any] {
             
             if let castMovies = movieCredits["cast"] as? [[String:Any]] {
                 
                 var tempMovies = [Movie]()
+                var tempShows = [TVShow]()
                 
-                for movie in castMovies {
-                    tempMovies.append(Movie(dict: movie))
+                for cast in castMovies {
+                   
+                    if let mediaType = cast["media_type"] as? String {
+                        
+                        if mediaType == "movie" {
+                            tempMovies.append(Movie(dict: cast))
+                        } else if mediaType == "tv" {
+                            tempShows.append(TVShow(dict: cast))
+                        }
+                    }
                 }
                 
+                tempDict[actorKeys.TVShows] = tempShows
                 tempDict[actorKeys.Movies] = tempMovies
             }
         }

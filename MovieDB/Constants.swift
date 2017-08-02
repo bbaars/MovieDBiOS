@@ -63,6 +63,7 @@ struct actorKeys {
     static let PlaceOfBirth = "place_of_birth"
     static let Popularity = "popularity"
     static let ProfilePath = "profile_path"
+     static let TVShows = "shows"
 }
 
 struct reviewKeys {

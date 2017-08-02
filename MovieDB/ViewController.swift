@@ -37,11 +37,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var topActors: [Actor] = [Actor]()
     var favMovies: [Movie] = [Movie]()
     var watchList: [Movie] = [Movie]()
+    var topTVShows: [TVShow] = [TVShow]()
     
     // filtering buttons are pushed
     var isPopular = true
     var isTopRated = false
     var isActor = false
+    var isTV = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +52,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         loadDetails()
         tableView.dataSource = self
         tableView.delegate = self
-        menuCurveImageView.image = #imageLiteral(resourceName: "MenuCurve")
         let img = UIImage(named: "notAvailable")
         self.image.image = img
     }
@@ -91,7 +92,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else if isTopRated {
             let movie = topRatedMovies[0]
             performSegue(withIdentifier: "toMovieDetailVC", sender: movie)
-        } else {
+        } else if isActor {
             let actor = topActors[0]
             
             let actorDB = ActorDBManager()
@@ -100,6 +101,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.performSegue(withIdentifier: "toActorDetailVC", sender: actorDB.getActor())
                 
             }
+        } else if isTV {
+            
+            let tv = topTVShows[0]
+            
+            let tvdb = TVShowDBManager()
+            
+            tvdb.downloadTVShowDBDetails(id: tv.id, completed: {
+                
+                self.performSegue(withIdentifier: "toTVDetailVC", sender: tvdb.getTvShowDetails())
+            })
         }
     }
     
@@ -161,9 +172,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return movieDetails.count - 1
         } else if isTopRated {
             return topRatedMovies.count - 1
-        } else {
+        } else if isActor {
             return topActors.count - 1
+        } else if isTV {
+            return topTVShows.count - 1
         }
+        
+        return 1
     }
     
     
@@ -180,15 +195,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return cell
             }
         } else if isTopRated {
-            if indexPath.row + 1 < movieDetails.count {
+            if indexPath.row + 1 < topRatedMovies.count {
                 let movie = topRatedMovies[indexPath.row + 1]
                 cell.configureCell(movie: movie)
                 return cell
             }
         } else if isActor {
-            if indexPath.row + 1 < movieDetails.count {
+            if indexPath.row + 1 < topActors.count {
                 let actor = topActors[indexPath.row + 1]
                 cell.configureCell(actor: actor)
+                return cell
+            }
+        } else if isTV {
+            if indexPath.row + 1 < topTVShows.count {
+                let tv = topTVShows[indexPath.row + 1]
+                cell.configureCell(tvshow: tv)
                 return cell
             }
         }
@@ -224,6 +245,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
                 }
             }
+        } else if isTV {
+            
+            if indexPath.row + 1 < topTVShows.count {
+                
+                let tv = topTVShows[indexPath.row + 1]
+                
+                let tvdb = TVShowDBManager()
+                
+                tvdb.downloadTVShowDBDetails(id: tv.id, completed: { 
+                    
+                    self.performSegue(withIdentifier: "toTVDetailVC", sender: tvdb.getTvShowDetails())
+                })
+            }
+            
         }
     }
     
@@ -247,6 +282,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let destination = segue.destination as? ActorDetailVC {
                 if let actor = sender as? Actor {
                     destination.actor = actor
+                }
+            }
+        } else if segue.identifier == "toTVDetailVC" {
+            if let destination = segue.destination as? TVShowTableVC {
+                if let show = sender as? TVShow {
+                    destination.tvShow = show
                 }
             }
         }
@@ -294,6 +335,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         isPopular = false
         isTopRated = true
         isActor = false
+        isTV = false
         filterLabel.text = "Top Rated Movies"
         
         movie.downloadMovieDBDetails(parameter: SearchTypes.topRated) {
@@ -313,7 +355,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         isPopular = true
         isTopRated = false
         isActor = false
-        
+        isTV = false
         filterLabel.text = "Popular Movies"
     
         if let url = URL(string: "\(imageUrlPrefix)w500/\(self.movieDetails[0].posterPath)") {
@@ -328,7 +370,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         isPopular = false
         isTopRated = false
         isActor = true
-        
+        isTV = false
         filterLabel.text = "Top Rated Actors"
         
         let actor = ActorDBManager()
@@ -345,6 +387,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+    
+   
+    @IBAction func topTVShowButtonPressed(_ sender: Any) {
+        isPopular = false
+        isTopRated = false
+        isActor = false
+        isTV = true
+        
+        filterLabel.text = "Popular TV Shows"
+        
+        let tv = TVShowDBManager()
+        
+        tv.downloadPopularTVShows {
+            
+            self.topTVShows = tv.getPopularTVShowDetails()
+            
+            if let url = URL(string: "\(imageUrlPrefix)w500/\(self.topTVShows[0].posterPath)") {
+                self.image.af_setImage(withURL: url)
+                self.popularTitle.text = self.topTVShows[0].name
+                self.popularDescription.text = self.topTVShows[0].overview
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     
     func showMenu() {
         

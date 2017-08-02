@@ -23,6 +23,7 @@ class Actor {
     private var _placeOfBirth: String?
     private var _popularity: Double?
     private var _profilePath: String?
+    private var _shows: [TVShow]?
     
     var adult: Bool {
         
@@ -121,6 +122,14 @@ class Actor {
         return _profilePath!
     }
     
+    var tvShows: [TVShow] {
+        if _shows == nil {
+            return []
+        }
+        
+        return _shows!
+    }
+    
     init(dict: [String:Any]) {
         self.update(dict)
     }
@@ -139,5 +148,6 @@ class Actor {
         _placeOfBirth = dict[actorKeys.PlaceOfBirth] as? String
         _popularity = dict[actorKeys.Popularity] as? Double
         _profilePath = dict[actorKeys.ProfilePath] as? String
+        _shows = dict[actorKeys.TVShows] as? [TVShow]
     }
 }

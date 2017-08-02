@@ -71,7 +71,7 @@ class MovieDBManager {
                                 
                                 if self.count == results.count {
                                     completed()
-                                     print("Completed")
+                                     print("Movies Completed")
                                 }
                             }
                         }
@@ -252,23 +252,6 @@ class MovieDBManager {
                         var actorArray = [Cast]()
                         
                         for person in cast {
-                            
-//                            if let character = person["character"] as? String {
-//                                tempActor["character"] = character
-//                            }
-//                            
-//                            if let id = person["id"] as? Int {
-//                                tempActor["id"] = id
-//                            }
-//                            
-//                            if let name = person["name"] as? String {
-//                                tempActor["name"] = name
-//                            }
-//                            
-//                            if let profilePath = person["profile_path"] as? String {
-//                                tempActor["profile_path"] = profilePath
-//                            }
-                            
                             actorArray.append(Cast(dict: person))
                             tempActor.removeAll()
                         }

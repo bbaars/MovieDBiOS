@@ -80,6 +80,24 @@ class MovieCell: UITableViewCell  {
         
         movieTitle.text = actor.name
         movieDescription.text = actor.biography
+    }
+    
+    func configureCell(tvshow: TVShow) {
         
-    }    
+        biographyLabel.isHidden = true
+        movieImage.isHidden = false
+        movieTitle.isHidden = false
+        movieDescription.isHidden = false
+        
+        /* no highlighting when the cell has been tapped */
+        self.selectionStyle = .none
+        
+        /* obtains the url and sets the movie image */
+        if let url = URL(string: "\(imageUrlPrefix)w500/\(tvshow.posterPath)") {
+            self.movieImage.af_setImage(withURL: url)
+        }
+        
+        movieTitle.text = tvshow.name
+        movieDescription.text = tvshow.overview
+    }
 }

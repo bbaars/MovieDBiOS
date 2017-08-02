@@ -217,7 +217,7 @@
                                 <rect key="frame" x="198" y="516" width="340" height="340"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qy-3l-ryy">
-                                        <rect key="frame" x="147" y="36" width="44" height="44"/>
+                                        <rect key="frame" x="155" y="18" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="Actor"/>
@@ -226,7 +226,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkI-eB-YiP">
-                                        <rect key="frame" x="42" y="149" width="44" height="44"/>
+                                        <rect key="frame" x="42" y="157" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="Star"/>
@@ -235,12 +235,21 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJz-Fi-JE2">
-                                        <rect key="frame" x="77" y="76" width="44" height="44"/>
+                                        <rect key="frame" x="95" y="45" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="Movie"/>
                                         <connections>
                                             <action selector="popularMovieButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KfP-nM-eb0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvO-ZQ-CPP">
+                                        <rect key="frame" x="51" y="92" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="tv"/>
+                                        <connections>
+                                            <action selector="topTVShowButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qz2-GW-ldf"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -422,6 +431,7 @@
                         <outlet property="twitterButton" destination="HPg-ia-pHb" id="fkz-XH-M0G"/>
                         <segue destination="Cj5-qG-6DJ" kind="custom" identifier="toMovieDetailVC" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="iYQ-YS-zux"/>
                         <segue destination="A3f-jr-fee" kind="custom" identifier="toActorDetailVC" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="oSd-9t-R8Z"/>
+                        <segue destination="uQY-9r-LcE" kind="custom" identifier="toTVDetailVC" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="1Qq-nG-Rv8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -790,7 +800,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HAI-GR-2fZ">
-                                <rect key="frame" x="-8" y="-8" width="430" height="208"/>
+                                <rect key="frame" x="-8" y="12" width="430" height="208"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
@@ -798,7 +808,7 @@
                                 </constraints>
                             </webView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Beauty and the beast" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WC-hT-p4l">
-                                <rect key="frame" x="158" y="208" width="236" height="61"/>
+                                <rect key="frame" x="158" y="228" width="236" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="uGi-mM-Xak"/>
                                 </constraints>
@@ -807,7 +817,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1star" translatesAutoresizingMaskIntoConstraints="NO" id="as9-Df-tBh">
-                                <rect key="frame" x="158" y="277" width="86" height="27"/>
+                                <rect key="frame" x="158" y="297" width="86" height="27"/>
                                 <color key="tintColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="7Z3-rd-MVL"/>
@@ -815,7 +825,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2h 49min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7o9-Hr-jSU">
-                                <rect key="frame" x="268" y="284" width="54" height="15"/>
+                                <rect key="frame" x="268" y="304" width="54" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="MT0-4F-xBA"/>
                                 </constraints>
@@ -824,21 +834,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notAvailable" translatesAutoresizingMaskIntoConstraints="NO" id="Zo9-VZ-dno">
-                                <rect key="frame" x="45" y="149" width="105" height="150"/>
+                                <rect key="frame" x="45" y="169" width="105" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="O9j-TV-bMc"/>
                                     <constraint firstAttribute="width" constant="105" id="Ufm-5R-X8G"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Timer" translatesAutoresizingMaskIntoConstraints="NO" id="SdE-UJ-a5K">
-                                <rect key="frame" x="249" y="284" width="14" height="14"/>
+                                <rect key="frame" x="249" y="304" width="14" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="B1v-bd-zcK"/>
                                     <constraint firstAttribute="width" constant="14" id="vjX-H3-4gD"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A team of explorers travel through a wormhole in space in an attemp to ensure humanity's survival." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNY-vF-l3b">
-                                <rect key="frame" x="45" y="324" width="324" height="85"/>
+                                <rect key="frame" x="45" y="344" width="324" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="z7s-aK-qyi"/>
                                 </constraints>
@@ -847,7 +857,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KwS-wO-yeN" customClass="UnderlineSegmentedControl" customModule="MovieDB" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="417" width="414" height="29"/>
+                                <rect key="frame" x="0.0" y="437" width="414" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="nvs-eO-497"/>
                                 </constraints>
@@ -861,7 +871,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="147" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eHY-dz-mQG">
-                                <rect key="frame" x="0.0" y="453" width="414" height="283"/>
+                                <rect key="frame" x="0.0" y="473" width="414" height="263"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <prototypes>
@@ -963,7 +973,7 @@
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fga-AO-NbY">
-                                <rect key="frame" x="45" y="307" width="324" height="30"/>
+                                <rect key="frame" x="45" y="327" width="324" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzE-j8-qbW">
                                         <rect key="frame" x="0.0" y="0.0" width="104.66666666666666" height="30"/>
@@ -995,7 +1005,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lbr-kk-73C">
-                                <rect key="frame" x="8" y="16" width="33" height="33"/>
+                                <rect key="frame" x="8" y="36" width="33" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="5Wn-Xe-B5y"/>
                                     <constraint firstAttribute="width" constant="33" id="xJt-2K-o4c"/>
@@ -1043,7 +1053,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08l-IU-24N" customClass="FloatingActionButton" customModule="MovieDB" customModuleProvider="target">
-                                <rect key="frame" x="366" y="16" width="40" height="40"/>
+                                <rect key="frame" x="366" y="36" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.82745098039999998" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="AcM-0f-FVx"/>
@@ -1156,7 +1166,7 @@
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YBl-bJ-4Dp">
-                                    <rect key="frame" x="25" y="309" width="364" height="30"/>
+                                    <rect key="frame" x="25" y="319" width="364" height="30"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zj7-30-Gfk">
                                             <rect key="frame" x="0.0" y="0.0" width="118" height="30"/>
@@ -1212,7 +1222,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="R7X-bP-YK4">
-                                    <rect key="frame" x="110.33333333333334" y="343" width="193.66666666666666" height="19.333333333333314"/>
+                                    <rect key="frame" x="110.33333333333334" y="353" width="193.66666666666666" height="19.333333333333314"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season: 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzj-L8-0hl">
                                             <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="19.333333333333314"/>
@@ -1232,7 +1242,10 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcA-81-Vcv">
-                                    <rect key="frame" x="25" y="382" width="364" height="82"/>
+                                    <rect key="frame" x="25" y="392" width="364" height="245"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="245" id="VXM-N9-4zC"/>
+                                    </constraints>
                                     <string key="text">Shark is an American legal drama created by Ian Biederman that originally aired on CBS from September 21, 2006 to May 20, 2008. The series stars James Woods.</string>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                     <color key="textColor" white="0.20000000000000001" alpha="1" colorSpace="calibratedWhite"/>
@@ -1260,7 +1273,7 @@
                                 <constraint firstAttribute="trailing" secondItem="Sju-dN-bKL" secondAttribute="trailing" id="Jzb-n6-rUk"/>
                                 <constraint firstItem="DoU-FJ-55T" firstAttribute="leading" secondItem="anj-si-BHr" secondAttribute="leading" constant="8" id="PZs-Ln-fkR"/>
                                 <constraint firstItem="7gJ-Lg-kof" firstAttribute="leading" secondItem="ulB-EI-RLr" secondAttribute="trailing" constant="11" id="U54-rV-Dpf"/>
-                                <constraint firstItem="YBl-bJ-4Dp" firstAttribute="top" secondItem="7gJ-Lg-kof" secondAttribute="bottom" constant="10" id="Weh-Jf-Rqf"/>
+                                <constraint firstItem="YBl-bJ-4Dp" firstAttribute="top" secondItem="7gJ-Lg-kof" secondAttribute="bottom" constant="20" id="Weh-Jf-Rqf"/>
                                 <constraint firstAttribute="trailing" secondItem="7gJ-Lg-kof" secondAttribute="trailing" constant="187" id="YOv-g0-qb8"/>
                                 <constraint firstItem="7gJ-Lg-kof" firstAttribute="leading" secondItem="Fbk-Xe-3qg" secondAttribute="leading" id="ZXV-gY-kb6"/>
                                 <constraint firstItem="DoU-FJ-55T" firstAttribute="top" secondItem="anj-si-BHr" secondAttribute="top" constant="16" id="ZcZ-Q3-ezm"/>
@@ -1631,6 +1644,7 @@
                         <outlet property="segmentedControl" destination="ls1-Lf-f8g" id="NFM-35-hQX"/>
                         <outlet property="tableView" destination="lAO-Tr-RDV" id="Aue-2A-zdK"/>
                         <segue destination="Cj5-qG-6DJ" kind="custom" identifier="toMovieDetail" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="xfq-FT-ipL"/>
+                        <segue destination="uQY-9r-LcE" kind="custom" identifier="toTVDetailVC" customClass="SegueFromRight" customModule="MovieDB" customModuleProvider="target" id="ZaR-wz-rKN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEx-V5-OpB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1659,10 +1673,12 @@
         <image name="menu" width="44" height="44"/>
         <image name="notAvailable" width="500" height="500"/>
         <image name="settings" width="41" height="40"/>
+        <image name="tv" width="41" height="40"/>
         <image name="watchlist" width="41" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kU3-DI-Et9"/>
-        <segue reference="bWK-AH-fXn"/>
+        <segue reference="xfq-FT-ipL"/>
+        <segue reference="Hba-Oc-oIe"/>
+        <segue reference="ZaR-wz-rKN"/>
     </inferredMetricsTieBreakers>
 </document>

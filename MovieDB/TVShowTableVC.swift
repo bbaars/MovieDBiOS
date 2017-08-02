@@ -35,7 +35,6 @@ class TVShowTableVC: UITableViewController {
         header = backdropPoster
         backdropPoster.clipsToBounds = true
         tableView.tableHeaderView?.addSubview(header)
-
         tableView.tableHeaderView?.sendSubview(toBack: header)
     }
     
@@ -50,21 +49,21 @@ class TVShowTableVC: UITableViewController {
         
         var headerTransform = CATransform3DIdentity
         
+        var headerFrame = CGRect(x: 0, y: -195, width: tableView.bounds.width, height: 195)
+        
         if tableView.contentOffset.y < 0 {
             
-            let headerScaleFactor:CGFloat = -(tableView.contentOffset.y) / header.bounds.height
-            let headerSizevariation = ((header.bounds.height * (1.0 + headerScaleFactor)) - header.bounds.height) / 7.0
-            //headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-            header.layer.transform = headerTransform
+            headerFrame.origin.y = tableView.contentOffset.y
+            headerFrame.size.height = (-tableView.contentOffset.y) + 195
+            header.frame = headerFrame
+            
         }  else {
-            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-40, -tableView.contentOffset.y), 0)
+          
+            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-50, -tableView.contentOffset.y), 0)
         }
         
         header.layer.transform = headerTransform
-
     }
-    
     
     
     //MARK: SEGUE

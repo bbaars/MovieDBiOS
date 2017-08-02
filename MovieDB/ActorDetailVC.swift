@@ -110,7 +110,7 @@ class ActorDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         } else if isMovie {
             return actor.movies.count
         } else if isTV {
-            return 1
+            return actor.tvShows.count
         }
         
         return 1
@@ -119,16 +119,16 @@ class ActorDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let movie = actor.movies[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         
         if isBio {
             cell.configureCell(label: actor.biography)
         }
         else if isMovie {
+            let movie = actor.movies[indexPath.row]
             cell.configureCell(movie: movie)
         } else {
-            cell.configureCell(label: "Sorry, not available at this time")
+            cell.configureCell(tvshow: actor.tvShows[indexPath.row])
         }
         
         return cell
@@ -137,21 +137,34 @@ class ActorDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let movieDB = MovieDBManager()
+        let tvDB = TVShowDBManager()
         
         if isMovie {
             
             movieDB.downloadMoreMovieDetails(url: "\(APIUrlPrefix)/movie/\(actor.movies[indexPath.row].id)?api_key=") {
                 self.performSegue(withIdentifier: "toMovieDetail", sender: movieDB.getMovie())
             }
-
+        } else if isTV {
+            
+            tvDB.downloadTVShowDBDetails(id: actor.tvShows[indexPath.row].id, completed: {
+                self.performSegue(withIdentifier: "toTVDetailVC", sender: tvDB.getTvShowDetails())
+            })
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let destination = segue.destination as? MovieDetailVC {
-            if let movie = sender as? Movie {
-                destination.movie = movie
+        if segue.identifier == "toMovieDetailVC" {
+            if let destination = segue.destination as? MovieDetailVC {
+                if let movie = sender as? Movie {
+                    destination.movie = movie
+                }
+            }
+        } else if segue.identifier == "toTVDetailVC" {
+            if let destination = segue.destination as? TVShowTableVC {
+                if let show = sender as? TVShow {
+                    destination.tvShow = show
+                }
             }
         }
     }

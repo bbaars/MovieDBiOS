@@ -13,11 +13,50 @@ class TVShowDBManager {
     
     
     var tvShow: TVShow!
-    
+    var popularTVShows = [TVShow]()
+    var count = 0
     
     func getTvShowDetails() -> TVShow {
         return tvShow
     }
+    
+    func getPopularTVShowDetails() -> [TVShow] {
+        return popularTVShows
+    }
+    
+    
+    func downloadPopularTVShows(completed: @escaping DownloadComplete) {
+        
+        
+        Alamofire.request("\(APIUrlPrefix)/tv/popular?api_key=\(APIKey)")
+        
+        .responseJSON { (results) in
+            
+            
+            if let dict = results.result.value as? [String:Any] {
+                
+                if let results = dict["results"] as? [[String:Any]] {
+                    
+                    for tvshow in results {
+                        
+                        if let id = tvshow["id"] as? Int {
+                            
+                            self.downloadTVShowDBDetails(id: id, completed: { 
+                                
+                                self.count += 1
+                                
+                                if self.count == results.count {
+                                    completed()
+                                    print("Popular TV Shows Completed")
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
     func downloadTVShowDBDetails(id: Int, completed: @escaping DownloadComplete) {
         
@@ -192,6 +231,7 @@ class TVShowDBManager {
             }
             
             self.tvShow = TVShow(dict: tempDict)
+            self.popularTVShows.append(TVShow(dict: tempDict))
             tempDict.removeAll()
             completed()
         }
