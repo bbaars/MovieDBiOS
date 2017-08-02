@@ -253,23 +253,23 @@ class MovieDBManager {
                         
                         for person in cast {
                             
-                            if let character = person["character"] as? String {
-                                tempActor["character"] = character
-                            }
+//                            if let character = person["character"] as? String {
+//                                tempActor["character"] = character
+//                            }
+//                            
+//                            if let id = person["id"] as? Int {
+//                                tempActor["id"] = id
+//                            }
+//                            
+//                            if let name = person["name"] as? String {
+//                                tempActor["name"] = name
+//                            }
+//                            
+//                            if let profilePath = person["profile_path"] as? String {
+//                                tempActor["profile_path"] = profilePath
+//                            }
                             
-                            if let id = person["id"] as? Int {
-                                tempActor["id"] = id
-                            }
-                            
-                            if let name = person["name"] as? String {
-                                tempActor["name"] = name
-                            }
-                            
-                            if let profilePath = person["profile_path"] as? String {
-                                tempActor["profile_path"] = profilePath
-                            }
-                            
-                            actorArray.append(Cast(dict: tempActor))
+                            actorArray.append(Cast(dict: person))
                             tempActor.removeAll()
                         }
                         

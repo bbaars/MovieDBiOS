@@ -38,6 +38,8 @@ class SearchDBManager {
                                     self.searchResults.append(Movie(dict: result))
                                 } else if mediaType == "person" {
                                     self.searchResults.append(Actor(dict: result))
+                                } else if mediaType == "tv" {
+                                    self.searchResults.append(TVShow(dict: result))
                                 }
                             }
                         }

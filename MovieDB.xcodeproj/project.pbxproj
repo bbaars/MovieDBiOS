@@ -23,6 +23,11 @@
 		CA61901C1F0442C700805A59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA61901A1F0442C700805A59 /* LaunchScreen.storyboard */; };
 		CA6190271F0442C700805A59 /* MovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6190261F0442C700805A59 /* MovieDBTests.swift */; };
 		CA6190321F0442C700805A59 /* MovieDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6190311F0442C700805A59 /* MovieDBUITests.swift */; };
+		CA660B931F312D69003EB057 /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA660B921F312D69003EB057 /* TVShow.swift */; };
+		CA660B951F31380E003EB057 /* TVSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA660B941F31380E003EB057 /* TVSeason.swift */; };
+		CA660B971F313C66003EB057 /* TVNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA660B961F313C66003EB057 /* TVNetwork.swift */; };
+		CA660B991F3142A8003EB057 /* TVShowDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA660B981F3142A8003EB057 /* TVShowDBManager.swift */; };
+		CA660B9B1F31646B003EB057 /* TVShowTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA660B9A1F31646B003EB057 /* TVShowTableVC.swift */; };
 		CA66874A1F2BF93E00F262C1 /* AccountDetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6687491F2BF93E00F262C1 /* AccountDetailTableVC.swift */; };
 		CA66874C1F2C1B5800F262C1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66874B1F2C1B5800F262C1 /* User.swift */; };
 		CA66874E1F2C1E0400F262C1 /* AccountDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA66874D1F2C1E0400F262C1 /* AccountDBManager.swift */; };
@@ -90,6 +95,11 @@
 		CA61902D1F0442C700805A59 /* MovieDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA6190311F0442C700805A59 /* MovieDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBUITests.swift; sourceTree = "<group>"; };
 		CA6190331F0442C700805A59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA660B921F312D69003EB057 /* TVShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
+		CA660B941F31380E003EB057 /* TVSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVSeason.swift; sourceTree = "<group>"; };
+		CA660B961F313C66003EB057 /* TVNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVNetwork.swift; sourceTree = "<group>"; };
+		CA660B981F3142A8003EB057 /* TVShowDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVShowDBManager.swift; sourceTree = "<group>"; };
+		CA660B9A1F31646B003EB057 /* TVShowTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVShowTableVC.swift; sourceTree = "<group>"; };
 		CA6687491F2BF93E00F262C1 /* AccountDetailTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailTableVC.swift; sourceTree = "<group>"; };
 		CA66874B1F2C1B5800F262C1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CA66874D1F2C1E0400F262C1 /* AccountDBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDBManager.swift; sourceTree = "<group>"; };
@@ -175,6 +185,9 @@
 				CAF926E61F184CE7008EC410 /* Review.swift */,
 				CAF926E81F185C87008EC410 /* Cast.swift */,
 				CA66874B1F2C1B5800F262C1 /* User.swift */,
+				CA660B921F312D69003EB057 /* TVShow.swift */,
+				CA660B941F31380E003EB057 /* TVSeason.swift */,
+				CA660B961F313C66003EB057 /* TVNetwork.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -184,6 +197,7 @@
 			children = (
 				CA1D249D1F0D9E0D00E69F96 /* MovieDBManager.swift */,
 				CAF055001F169210000BB584 /* ActorDBManager.swift */,
+				CA660B981F3142A8003EB057 /* TVShowDBManager.swift */,
 				CA66874D1F2C1E0400F262C1 /* AccountDBManager.swift */,
 				CAD0A93D1F2E30AB002F07E7 /* SearchDBManager.swift */,
 				CA1D24A01F0D9F3D00E69F96 /* Constants.swift */,
@@ -270,6 +284,7 @@
 				CAF44FC61F27FBF8001DCF68 /* ActorDetailVC.swift */,
 				CA6687491F2BF93E00F262C1 /* AccountDetailTableVC.swift */,
 				CAD0A93B1F2E240F002F07E7 /* SearchTableVC.swift */,
+				CA660B9A1F31646B003EB057 /* TVShowTableVC.swift */,
 				CA6190111F0442C700805A59 /* AppDelegate.swift */,
 			);
 			name = Controller;
@@ -576,6 +591,7 @@
 				CAF055011F169210000BB584 /* ActorDBManager.swift in Sources */,
 				CA6190141F0442C700805A59 /* ViewController.swift in Sources */,
 				CAFB15551F111F6000332131 /* Movie.swift in Sources */,
+				CA660B9B1F31646B003EB057 /* TVShowTableVC.swift in Sources */,
 				CA66874C1F2C1B5800F262C1 /* User.swift in Sources */,
 				CA3CD8F81F2AAFFD0087D824 /* MovieDetailHeaderView.swift in Sources */,
 				CAF66B341F1427AA00A37B26 /* Actor.swift in Sources */,
@@ -593,11 +609,15 @@
 				CAF66B321F1427A000A37B26 /* Genre.swift in Sources */,
 				CAF66B301F14089600A37B26 /* UIImageViewX.swift in Sources */,
 				CAFB15581F114D5400332131 /* RoundImageWithShadow.swift in Sources */,
+				CA660B951F31380E003EB057 /* TVSeason.swift in Sources */,
+				CA660B931F312D69003EB057 /* TVShow.swift in Sources */,
 				CA1D24A11F0D9F3D00E69F96 /* Constants.swift in Sources */,
+				CA660B991F3142A8003EB057 /* TVShowDBManager.swift in Sources */,
 				CA66874E1F2C1E0400F262C1 /* AccountDBManager.swift in Sources */,
 				CAC3C2A41F146B8400584C8C /* SlideFromRight.swift in Sources */,
 				CA66874A1F2BF93E00F262C1 /* AccountDetailTableVC.swift in Sources */,
 				CA0650741F1A8F1700AD4CE3 /* MovieDetailCell.swift in Sources */,
+				CA660B971F313C66003EB057 /* TVNetwork.swift in Sources */,
 				CAD0A93E1F2E30AB002F07E7 /* SearchDBManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

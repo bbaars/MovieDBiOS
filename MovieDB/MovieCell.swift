@@ -78,11 +78,8 @@ class MovieCell: UITableViewCell  {
             self.movieImage.af_setImage(withURL: url)
         }
         
-        
         movieTitle.text = actor.name
         movieDescription.text = actor.biography
         
-        
-    }
-    
+    }    
 }

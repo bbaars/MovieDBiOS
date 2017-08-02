@@ -22,9 +22,12 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
     var isMultiSearch: Bool = false
     var movieFilters = [String]()
     var actorFilters = [String]()
+    var tvFilters = [String]()
     var numFilters = 0
     var movieActors = [Cast]()
+    var tvActors = [Cast]()
     var isMovie = false
+    var isTV = false
     var isClear = false
     
     // MARK: END OF IBOUTLETS AND VARIABLES
@@ -94,6 +97,8 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
             tableView.reloadData()
             resultsLabel.text = ""
             numFilters = 0
+            isTV = false
+            isMovie = false
             
             searchMultiButton.setTitle("Search", for: .normal)
             searchMultiButton.setTitleColor(UIColor.init(red: 0/255, green: 211/255, blue: 115/255, alpha: 1.0), for: .normal)
@@ -105,8 +110,6 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
             let search = SearchDBManager()
             view.endEditing(true)
           
-
-            
             if actorFilters.count > 1 {
                 search.searchForMultipleActors(query: actorFilters) {
                     self.results.removeAll()
@@ -150,7 +153,6 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
             return cell
         }
         
-        
         return SearchCell()
     }
     
@@ -158,6 +160,7 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
         
         let actorDB = ActorDBManager()
         let movieDB = MovieDBManager()
+        let tvDB = TVShowDBManager()
         
         if results[indexPath.row] is Movie {
             let movie = results[indexPath.row] as! Movie
@@ -180,6 +183,15 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
                     
                     self.performSegue(withIdentifier: "toActorDetailVC", sender: actorDB.getActor())
                 }
+            }
+        } else if results[indexPath.row] is TVShow {
+            
+            if let show = results[indexPath.row] as? TVShow {
+                
+                tvDB.downloadTVShowDBDetails(id: (show.id), completed: { 
+                    
+                    self.performSegue(withIdentifier: "toTVDetailVC", sender: tvDB.getTvShowDetails())
+                })
             }
         }
     }
@@ -218,7 +230,18 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
                 self.resultsLabel.text! += "\((obj as! Actor).name), "
                 print("Actor ID: \((obj as! Actor).id)")
                 
-  
+            } else if obj is TVShow {
+                self.tvFilters.append("\((obj as! TVShow).id)")
+                self.resultsLabel.text! += "\((obj as! TVShow).name)"
+                
+                let account = TVShowDBManager()
+                
+                account.downloadTVShowDBDetails(id: (obj as! TVShow).id, completed: { 
+                    
+                    self.isTV = true
+                    self.tvActors = account.getTvShowDetails().cast
+                    
+                })
             }
             
             self.searchBar.text! = ""
@@ -229,7 +252,6 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
         addAction.backgroundColor = UIColor.init(red: 22/255, green: 35/255, blue: 59/255, alpha: 1.0)
         
         return [addAction]
-        
     }
     
     
@@ -245,6 +267,12 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
             if let destination = segue.destination as? ActorDetailVC {
                 if let actor = sender as? Actor {
                     destination.actor = actor
+                }
+            }
+        } else if segue.identifier == "toTVDetailVC" {
+            if let destination = segue.destination as? TVShowTableVC {
+                if let show = sender as? TVShow {
+                    destination.tvShow = show
                 }
             }
         }
@@ -267,11 +295,10 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchBar.text == "" || searchBar.text == nil {
-            searchBar.endEditing(true)
             self.results.removeAll()
             self.tableView.reloadData()
             
-        } else if movieFilters == [] {
+        } else if movieFilters == [] && tvFilters == [] {
             
             let searchString = searchBar.text?.replacingOccurrences(of: " ", with: "%20")
             let search = SearchDBManager()
@@ -281,13 +308,20 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
                 self.tableView.reloadData()
                 
             }
-        } else if isMovie {
+        } else if isMovie && !isTV {
             
             let searchString = searchBar.text!.lowercased()
             
             results = movieActors.filter({$0.name.lowercased().range(of: searchString) != nil || $0.character.lowercased().range(of: searchString) != nil})
-            //results.append(movieActors.filter({$0.character.range(of: searchString) != nil}))
             tableView.reloadData()
+            
+        } else if isTV && !isMovie {
+            
+            let searchString = searchBar.text!.lowercased()
+            
+            results = tvActors.filter({$0.name.lowercased().range(of: searchString) != nil || $0.character.lowercased().range(of: searchString) != nil})
+            tableView.reloadData()
+            
         }
     }
     

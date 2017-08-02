@@ -24,8 +24,7 @@ class MovieDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var genreLabel3: UILabel!
     @IBOutlet weak var menu: UIViewX!
     
-    
-    
+
     var movie: Movie!
     var vote: Int = 0
     var isInfo = true
