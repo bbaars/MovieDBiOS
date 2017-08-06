@@ -21,6 +21,7 @@ class TVShowTableVC: UITableViewController {
     @IBOutlet weak var seasonsLabel: UILabel!
     @IBOutlet weak var episodesLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
     
     var tvShow:TVShow!
     var header: UIView!
@@ -59,7 +60,7 @@ class TVShowTableVC: UITableViewController {
             
         }  else {
           
-            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-50, -tableView.contentOffset.y), 0)
+            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-25, -tableView.contentOffset.y), 0)
         }
         
         header.layer.transform = headerTransform
@@ -84,7 +85,7 @@ class TVShowTableVC: UITableViewController {
         seasonsLabel.text = "Seasons: \(tvShow.numOfSeason)"
         episodesLabel.text = "Episodes: \(tvShow.numOfEpisodes)"
         overviewLabel.text = tvShow.overview
-        
+        ratingLabel.text = String(format: "%.1f", tvShow.voteAverage / 2)
         
         genre1Label.isHidden = true
         genre2Label.isHidden = true
@@ -198,7 +199,7 @@ class TVShowTableVC: UITableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
-        if let destination = segue.destination as? ActorDetailVC {
+        if let destination = segue.destination as? ActorTableVC {
             if let actor = sender as? Actor {
                 destination.actor = actor
             }

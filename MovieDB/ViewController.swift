@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import AlamofireImage
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -44,9 +45,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var isTopRated = false
     var isActor = false
     var isTV = false
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        image.layer.cornerRadius = 15.0
+        image.clipsToBounds = true
         
         addGestureRecognizer()
         loadDetails()
@@ -54,6 +58,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         let img = UIImage(named: "notAvailable")
         self.image.image = img
+        
     }
     
     
@@ -62,6 +67,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         closeMenu()
         loadUserDetails()
     }
+    
     
     func addGestureRecognizer() {
         
@@ -273,13 +279,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         } else if segue.identifier == "toMovieDetailVC" {
-            if let destination = segue.destination as? MovieDetailVC {
+            if let destination = segue.destination as? MovieDetailTableVC {
                 if let movie = sender as? Movie {
                     destination.movie = movie
                 }
             }
         } else if segue.identifier == "toActorDetailVC" {
-            if let destination = segue.destination as? ActorDetailVC {
+            if let destination = segue.destination as? ActorTableVC {
                 if let actor = sender as? Actor {
                     destination.actor = actor
                 }
@@ -315,12 +321,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func sideMenuTapped(_ sender: Any) {
-        showMenu();
+        showMenu()
     }
     
     
     @IBAction func screenCoverButtonTapped(_ sender: Any) {
-        hideMenu();
+        hideMenu()
     }
     
     
@@ -388,6 +394,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        hideMenu()
+    }
    
     @IBAction func topTVShowButtonPressed(_ sender: Any) {
         isPopular = false

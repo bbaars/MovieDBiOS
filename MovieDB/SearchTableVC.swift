@@ -43,13 +43,22 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
         
         searchBar.returnKeyType = .search
         
+        searchBar.backgroundColor = UIColor.clear
+        searchBar.isTranslucent = true
+        searchBar.showsCancelButton = false
+        
+        //let search:UISearchBar = UISearchBar(frame: CGRect(
+        
+        
         tableView.estimatedRowHeight = 140
         tableView.rowHeight = UITableViewAutomaticDimension
-        
+    
         let textField = searchBar.value(forKey: "searchField") as! UITextField
         textField.textColor = UIColor.white
+        textField.backgroundColor = UIColor.init(red: 22/255, green: 35/255, blue: 59/255, alpha: 1.0)
         updateView()
     }
+    
     
     // MARK: STICKY HEADER
     
@@ -258,13 +267,13 @@ class SearchTableVC: UITableViewController, UISearchBarDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toMovieDetailVC" {
-            if let destination = segue.destination as? MovieDetailVC {
+            if let destination = segue.destination as? MovieDetailTableVC {
                 if let movie = sender as? Movie {
                     destination.movie = movie
                 }
             }
         } else if segue.identifier == "toActorDetailVC" {
-            if let destination = segue.destination as? ActorDetailVC {
+            if let destination = segue.destination as? ActorTableVC {
                 if let actor = sender as? Actor {
                     destination.actor = actor
                 }

@@ -14,6 +14,7 @@ class Actor {
     private var _adult: Bool?
     private var _biography: String?
     private var _birthday: String?
+    private var _cast: [Cast]?
     private var _deathday: String?
     private var _gender: Int?
     private var _homepage: String?
@@ -48,6 +49,14 @@ class Actor {
         }
         
         return _birthday!
+    }
+    
+    var cast: [Cast] {
+        if _cast == nil {
+            return []
+        }
+        
+        return _cast!
     }
     
     var deathday: String {
@@ -138,6 +147,7 @@ class Actor {
     func update(_ dict: [String:Any]) {
         _adult = dict[actorKeys.Adult] as? Bool
         _biography = dict[actorKeys.Biography] as? String
+        _cast = dict[actorKeys.Cast] as? [Cast]
         _birthday = dict[actorKeys.Birthday] as? String
         _deathday = dict[actorKeys.Deathday] as? String
         _gender = dict[actorKeys.Gender] as? Int

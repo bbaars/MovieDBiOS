@@ -9,6 +9,7 @@ target 'MovieDB' do
     pod 'FBSDKLoginKit'
 	pod 'Alamofire', '~>4.0'
 	pod 'Fabric'
+	pod 'Crashlytics'
 	pod 'TwitterKit'
 	pod 'AlamofireImage','~>3.1'
   target 'MovieDBTests' do

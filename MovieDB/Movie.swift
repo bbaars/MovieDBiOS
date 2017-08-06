@@ -8,13 +8,13 @@
 
 import Foundation
 
-
 class Movie {
     
     private var _adult: Bool?
     private var _backdropPath: String?
     private var _budget: String?
     private var _cast: [Cast]?
+    private var _character: String?
     private var _genre: [[String:Any]]?
     private var _homepage: String?
     private var _id: Int?
@@ -68,6 +68,14 @@ class Movie {
         }
         
         return _cast!
+    }
+    
+    var character: String {
+        if _character == nil {
+            return ""
+        }
+        
+        return _character!
     }
     
     var genre: [[String:Any]] {
@@ -242,6 +250,7 @@ class Movie {
         _backdropPath = dict[movieKeys.BackdropPath] as? String
         _budget = dict[movieKeys.Budget] as? String
         _cast = dict[movieKeys.Cast] as? [Cast]
+        _character = dict[movieKeys.Character] as? String
         _genre = dict[movieKeys.Genres] as? [[String:Any]]
         _homepage = dict[movieKeys.Homepage] as? String
         _id = dict[movieKeys.ID] as? Int
