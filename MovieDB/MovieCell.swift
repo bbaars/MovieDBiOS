@@ -117,7 +117,12 @@ class MovieCell: UITableViewCell  {
             self.movieImage.af_setImage(withURL: url)
         }
         
-        movieTitle.text = tvshow.name
+        if tvshow.character != ""{
+            movieTitle.text = "\(tvshow.name) (\(tvshow.character))"
+        } else {
+            movieTitle.text = "\(tvshow.name)"
+        }
+        
         movieDescription.text = tvshow.overview
     }
 }

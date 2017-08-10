@@ -36,7 +36,6 @@ class Movie {
     private var _voteAverage: Double?
     private var _voteCount: Int?
     
-    
     var adult: Bool {
         
         if _adult == nil {

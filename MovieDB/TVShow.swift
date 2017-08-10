@@ -14,6 +14,7 @@ class TVShow {
     
     private var _backdropPath: String?
     private var _cast: [Cast]?
+    private var _character: String?
     private var _createdBy: [[String:Any]]?
     private var _episodeRuntime: [Int]?
     private var _firstAirDate: String?
@@ -52,6 +53,14 @@ class TVShow {
         }
         
         return _cast!
+    }
+    
+    var character: String {
+        if _character == nil {
+            return ""
+        }
+        
+        return _character!
     }
     
     var createdBy: [[String:Any]] {
@@ -245,6 +254,7 @@ class TVShow {
         _backdropPath = dict["backdrop_path"] as? String
         _cast = dict["cast"] as? [Cast]
         _createdBy = dict["created_by"] as? [[String:Any]]
+        _character = dict["character"] as? String
         _episodeRuntime = dict["episode_run_time"] as? [Int]
         _firstAirDate = dict["first_air_date"] as? String
         _genres = dict["genres"] as? [[String:Any]]

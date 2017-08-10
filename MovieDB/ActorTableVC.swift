@@ -64,7 +64,7 @@ class ActorTableVC: UITableViewController {
     func updateUI() {
         
         nameLabel.text = actor.name
-        creditsLabel.text = "Know Credits: \(actor.movies.count)"
+        creditsLabel.text = "Know Credits: \(actor.movies.count + actor.tvShows.count)"
         birthdayLabel.text = "Birthday: \(actor.birthday)"
         placeOfBirthLabel.text = "Place of Birth: \(actor.placeOfBirth)"
         ///biographyDescription.text = actor.biography

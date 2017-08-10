@@ -66,7 +66,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         hideMenu()
         closeMenu()
         loadUserDetails()
-    }
+        
+        
+     }
     
     
     func addGestureRecognizer() {
@@ -154,6 +156,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         account.downloadWatchList {
             self.watchList = account.getWatchList()
+            
+            var ids = [Int]()
+            
+            for movie in self.watchList {
+                
+                ids.append(movie.id)
+            }
+            
+            let userDefault = UserDefaults.standard
+            let encodingData = NSKeyedArchiver.archivedData(withRootObject: ids)
+            
+            userDefault.setValue(encodingData, forKey: "watchlist")
+            userDefault.synchronize()
+            
+            let decoded = userDefault.object(forKey: "watchlist") as! Data
+            let decodedWatchlist = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Int]
+            
+            for id in decodedWatchlist {
+                print(id)
+            }
+
+            
+            
         }
         
         account.downloadFavoriteMovies {
