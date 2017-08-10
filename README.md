@@ -1,7 +1,7 @@
 # MovieDBiOS
 
 ### Main screen
-![Alt text](/Screenshots/screenshot1.PNG?raw=true "")
+![Alt text](/Screenshots/screenshot1.PNG?raw=true "" width=50)
 
 ### Movie Detail
 ![Alt text](/Screenshots/screenshot2.PNG?raw=true "")
